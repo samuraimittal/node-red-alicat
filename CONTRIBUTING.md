@@ -4,7 +4,7 @@ How to work on @samuraimittal/node-red-alicat: the checks a change must pass, th
 
 ## Setup
 
-Node.js 20.19 or newer for development (the package itself runs on Node.js 18.5+, as Node-RED 4 does).
+Node.js 20.19 or newer, with **npm 11** (`npm install -g npm@11` on Node 20 and 22; Node 24 ships it), for development (the package itself runs on Node.js 18.5+, as Node-RED 4 does).
 
 ```powershell
 npm install
