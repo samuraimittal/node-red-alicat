@@ -21,7 +21,7 @@ jobs:
     name: Lint, types, coverage, package contents
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: 24
@@ -47,7 +47,7 @@ jobs:
         node: [22, 24]
         node-red: ['4.0', '4.1.16', '5.0.8']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
@@ -66,7 +66,7 @@ jobs:
     name: Windows / Node 24
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: 24
@@ -89,7 +89,7 @@ jobs:
           - { node: 18, node-red: '4.1.16' }
           - { node: 20, node-red: '4.1.16' }
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
