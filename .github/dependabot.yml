@@ -8,6 +8,11 @@ updates:
     groups:
       dev-tooling:
         patterns: ['*']
+    ignore:
+      # Node's type definitions stay on the oldest Node.js the package supports (engines >=18.5),
+      # so the type check catches APIs that Node 18 doesn't have.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     open-pull-requests-limit: 5
 
   - package-ecosystem: github-actions
