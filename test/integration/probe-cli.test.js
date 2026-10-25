@@ -5,6 +5,7 @@ const path = require('path');
 const { execFile } = require('child_process');
 const { AlicatSimulator } = require('../../tools/sim/AlicatSimulator');
 const { REG } = require('../../lib/alicat/registers');
+const { until } = require('../helpers/wait');
 
 const PROBE = path.join(__dirname, '..', '..', 'tools', 'alicat-probe.js');
 
@@ -72,7 +73,8 @@ describe('alicat-probe CLI (against a simulator)', function () {
         const command = await probe(['127.0.0.1', 'command', '7', '1', '--write', '--extended', '--duration', '400', ...at]);
         assert.equal(command.code, 0, command.out);
         assert.match(command.out, /wrote NOP \(0, 0\)[\s\S]*wrote command \(7, 1\) on the extended interface/);
-        assert.equal(sim.model.displayLocked, true, 'the command ran on the device');
+        // The device samples its command registers every ~120 ms; on a busy machine that can fall after the probe exits.
+        await until(() => sim.model.displayLocked === true, 2000, 'the command to run on the device');
         const blocked = await probe(['127.0.0.1', 'command', '26', '0', '--write', '--extended', ...at]);
         assert.match(blocked.out, /blocked by this library/, 'factory restore stays blocked');
     });
