@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1778" height="694" viewBox="2746 4316 1778 694">
+<title>5 · Control loop: alicat-control keeps the instrument at a desired state</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="2746" y="4316" width="1778" height="694" fill="#ffffff"/>
+<text class="body" x="2770" y="4372" font-size="24" fill="#1e1e1e">5 · Control loop: alicat-control keeps the instrument at a desired state</text>
+<rect x="2770" y="4388" width="1730" height="598" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="2810" y="4442.8">The desired state lives in the node instance; it starts empty after a deploy or restart.</tspan></text>
+<rect x="2810" y="4478" width="330" height="120" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2822" y="4502.9">1 · nodes/alicat-control.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2822" y="4524.0">desiredFrom</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2822" y="4545.9">msg.payload {setpoint, variable, valve}, any</tspan><tspan x="2822" y="4563.4">subset, sets the desired state.</tspan></text>
+<rect x="3250" y="4478" width="330" height="120" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4502.9">2 · lib/Reconciler.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="4524.0">set · _merge</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4545.9">Merges it and subscribes to the device's</tspan><tspan x="3262" y="4563.4">snapshots (the same poll loop as the read node).</tspan></text>
+<rect x="3690" y="4478" width="330" height="120" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4502.9">3 · lib/Reconciler.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3702" y="4524.0">_onSnapshot · _evaluate</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4545.9">Only fresh, good snapshots count (else: waiting).</tspan><tspan x="3702" y="4563.4">Checks the variable, then the valve, then the</tspan><tspan x="3702" y="4580.9">setpoint; a stuck one doesn't block the others.</tspan></text>
+<rect x="4130" y="4478" width="330" height="120" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="4142" y="4502.9">lib/alicat/setpoint.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="4142" y="4524.0">withinTolerance · setpointTolerance</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="4142" y="4545.9">Against the float32 value of the desired setpoint,</tspan><tspan x="4142" y="4563.4">within the tolerance set or half the last displayed</tspan><tspan x="4142" y="4580.9">decimal.</tspan></text>
+<rect x="3690" y="4658" width="330" height="126" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4682.9">4 · lib/Reconciler.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3702" y="4704.0">_correct</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4725.9">A mismatch is corrected, spaced 1 s doubling to</tspan><tspan x="3702" y="4743.4">10 s. After maxAttempts: failed, then it keeps</tspan><tspan x="3702" y="4760.9">trying at the slowest rate.</tspan></text>
+<rect x="3250" y="4658" width="330" height="126" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4682.9">lib/AlicatDevice.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="4704.0">setControlVariable · valve ·</tspan><tspan x="3262" y="4720.3">setSetpoint</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4741.9">The same write paths as the setpoint and</tspan><tspan x="3262" y="4759.4">command nodes (view 3).</tspan></text>
+<rect x="4130" y="4658" width="330" height="126" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="4142" y="4684.8">Changed from outside</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="4142" y="4706.9">lib/Reconciler.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="4142" y="4728.0">_onDrift</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="4142" y="4749.9">drift, then the policy: revert (default), adopt, or</tspan><tspan x="4142" y="4767.4">report only.</tspan></text>
+<rect x="3690" y="4844" width="330" height="102" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4868.9">5 · lib/Reconciler.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3702" y="4890.0">_emit</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3702" y="4911.9">event: accepted · waiting · correcting · converged</tspan><tspan x="3702" y="4929.4">· drift · failed · released.</tspan></text>
+<rect x="3250" y="4844" width="330" height="102" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4868.9">6 · nodes/alicat-control.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="4890.0">topic</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4911.9">Each event is a message (topic = the event) and</tspan><tspan x="3262" y="4929.4">sets the status dot.</tspan></text>
+<polyline points="3146,4538 3244,4538" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="3586,4538 3684,4538" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3606" y="4528" width="59" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3635.5" y="4542.0">snapshot</tspan></text>
+<polyline points="4026,4538 4124,4538" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="4047" y="4528" width="57" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="4075.5" y="4542.0">compare</tspan></text>
+<polyline points="3855,4604 3855,4652" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3824" y="4618" width="62" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3855" y="4632.0">mismatch</tspan></text>
+<polyline points="3684,4721 3586,4721" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="3415,4652 3797,4604" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3563" y="4618" width="87" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3606.5" y="4632.0">next snapshot</tspan></text>
+<polyline points="3913,4604 4295,4652" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="4055" y="4618" width="99" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="4104.5" y="4632.0">external change</tspan></text>
+<polyline points="3855,4790 3817,4838" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<polyline points="4295,4790 3894,4838" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<polyline points="3684,4895 3586,4895" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="3616" y="4885" width="38" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3635" y="4899.0">event</tspan></text>
+</svg>

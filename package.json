@@ -1,0 +1,91 @@
+{
+    "name": "@samuraimittal/node-red-alicat",
+    "version": "0.1.0-dev.0",
+    "private": true,
+    "description": "Node-RED nodes for Alicat mass flow and pressure controllers over Modbus TCP: one supervised socket per device, priority queue, decoded engineering units.",
+    "license": "Apache-2.0",
+    "author": "samuraimittal (https://github.com/samuraimittal)",
+    "homepage": "https://github.com/samuraimittal/node-red-alicat#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samuraimittal/node-red-alicat.git"
+    },
+    "bugs": {
+        "url": "https://github.com/samuraimittal/node-red-alicat/issues"
+    },
+    "keywords": [
+        "node-red",
+        "alicat",
+        "modbus",
+        "modbus-tcp",
+        "mass-flow-controller",
+        "pressure-controller"
+    ],
+    "engines": {
+        "node": ">=18.5"
+    },
+    "node-red": {
+        "version": ">=4.0.0",
+        "nodes": {
+            "alicat-device": "nodes/alicat-device.js",
+            "alicat-read": "nodes/alicat-read.js",
+            "alicat-setpoint": "nodes/alicat-setpoint.js",
+            "alicat-command": "nodes/alicat-command.js",
+            "alicat-pid": "nodes/alicat-pid.js",
+            "alicat-status": "nodes/alicat-status.js",
+            "alicat-control": "nodes/alicat-control.js"
+        }
+    },
+    "files": [
+        "nodes/",
+        "resources/",
+        "lib/",
+        "examples/",
+        "tools/sim/",
+        "tools/alicat-sim.js",
+        "tools/alicat-probe.js",
+        "tools/cli.js",
+        "README.md",
+        "CHANGELOG.md",
+        "SECURITY.md",
+        "LICENSE"
+    ],
+    "bin": {
+        "alicat-sim": "tools/alicat-sim.js",
+        "alicat-probe": "tools/alicat-probe.js"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "scripts": {
+        "test": "mocha \"test/unit/**/*.test.js\" \"test/integration/**/*.test.js\" \"test/nodes/**/*.test.js\"",
+        "test:hil": "mocha \"test/hil/**/*.test.js\"",
+        "test:compat": "node test/compat/runtime-smoke.js",
+        "soak": "node --expose-gc test/soak/soak.js",
+        "coverage": "c8 --check-coverage npm test",
+        "lint": "eslint .",
+        "typecheck": "tsc -p . && tsc -p tsconfig.test.json",
+        "check:pack": "node tools/check-pack.js",
+        "diagram": "node tools/architecture-diagram.js",
+        "check": "npm run lint && npm run typecheck && npm run coverage && npm run test:compat && npm run check:pack",
+        "sim": "node tools/alicat-sim.js",
+        "dev": "node tools/dev.js",
+        "probe": "node tools/alicat-probe.js"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^18.19.130",
+        "@types/sinon": "^22.0.0",
+        "c8": "^12.0.0",
+        "eslint": "^10.12.0",
+        "eslint-plugin-n": "^18.4.1",
+        "globals": "^17.13.0",
+        "mocha": "^12.0.3",
+        "node-red": "^5.0.8",
+        "node-red-node-test-helper": "^0.3.6",
+        "sinon": "^22.1.0",
+        "typescript": "^7.0.2"
+    }
+}

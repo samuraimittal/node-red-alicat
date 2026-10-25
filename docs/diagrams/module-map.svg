@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2508" height="3234" viewBox="1216 -72 2508 3234">
+<title>1 · Module map: every file in lib/, nodes/ and resources/</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="1216" y="-72" width="2508" height="3234" fill="#ffffff"/>
+<text class="body" x="1240" y="-16" font-size="24" fill="#1e1e1e">1 · Module map: every file in lib/, nodes/ and resources/</text>
+<rect x="1240" y="0" width="2460" height="3138" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="1280" y="54.8">From the editor at the top down to the wire. Grey arrows point from a file to a file it requires; dashed purple arrows are events. Shared modules have no arrows: boxes list them under &quot;uses&quot;, and they list who uses them.</tspan></text>
+<rect x="1280" y="90" width="1300" height="438" rx="10" fill="#f3f0ff" stroke="#6741d9" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#6741d9"><tspan x="1300" y="128.5">Editor (browser)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1300" y="151.9">Plain scripts the Node-RED editor loads from resources/: one dialog each. Texts and help come from nodes/locales/en-US/.</tspan></text>
+<rect x="1300" y="177" width="300" height="163" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="201.9">resources/alicat-editor.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="223.9">window.AlicatEditor, shared by every dialog:</tspan><tspan x="1312" y="241.4">a copy of the BOUNDS table, range</tspan><tspan x="1312" y="258.9">validators, the context-store list.</tspan></text>
+<rect x="1620" y="177" width="300" height="163" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="201.9">resources/alicat-device.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="223.9">Config dialog: address, unit ID, timings,</tspan><tspan x="1632" y="241.4">Gen-1 layout. Test connection posts to</tspan><tspan x="1632" y="258.9">/alicat-modbus/probe.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="1632" y="279.1">+ nodes/alicat-device.html ·</tspan><tspan x="1632" y="294.1">nodes/locales/en-US/</tspan><tspan x="1632" y="309.1">alicat-device.{json,html} ·</tspan><tspan x="1632" y="324.1">resources/alicat-device.css</tspan></text>
+<rect x="1940" y="177" width="300" height="163" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="201.9">resources/alicat-read.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="223.9">Read dialog: interval or input trigger,</tspan><tspan x="1952" y="241.4">dataset, output, change filter, context</tspan><tspan x="1952" y="258.9">publishing.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="1952" y="279.1">+ nodes/alicat-read.html ·</tspan><tspan x="1952" y="294.1">nodes/locales/en-US/</tspan><tspan x="1952" y="309.1">alicat-read.{json,html}</tspan></text>
+<rect x="2260" y="177" width="300" height="163" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2272" y="201.9">resources/alicat-setpoint.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2272" y="223.9">Setpoint dialog: TypedInput value; a control</tspan><tspan x="2272" y="241.4">variable shows the mode-switch options.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="2272" y="261.1">+ nodes/alicat-setpoint.html ·</tspan><tspan x="2272" y="276.1">nodes/locales/en-US/</tspan><tspan x="2272" y="291.1">alicat-setpoint.{json,html}</tspan></text>
+<rect x="1300" y="360" width="300" height="148" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="384.9">resources/alicat-command.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="406.9">Command dialog: a named command or raw</tspan><tspan x="1312" y="424.4">{id, arg}; the choice shows its argument</tspan><tspan x="1312" y="441.9">rows.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="1312" y="462.1">+ nodes/alicat-command.html ·</tspan><tspan x="1312" y="477.1">nodes/locales/en-US/</tspan><tspan x="1312" y="492.1">alicat-command.{json,html}</tspan></text>
+<rect x="1620" y="360" width="300" height="148" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="384.9">resources/alicat-pid.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="406.9">PID dialog: read gains, write P, D and I, or</tspan><tspan x="1632" y="424.4">set the loop algorithm.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="1632" y="444.1">+ nodes/alicat-pid.html ·</tspan><tspan x="1632" y="459.1">nodes/locales/en-US/</tspan><tspan x="1632" y="474.1">alicat-pid.{json,html}</tspan></text>
+<rect x="1940" y="360" width="300" height="148" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="384.9">resources/alicat-status.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="406.9">Status dialog: the device and the</tspan><tspan x="1952" y="424.4">periodic-stats interval.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="1952" y="444.1">+ nodes/alicat-status.html ·</tspan><tspan x="1952" y="459.1">nodes/locales/en-US/</tspan><tspan x="1952" y="474.1">alicat-status.{json,html}</tspan></text>
+<rect x="2260" y="360" width="300" height="148" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2272" y="384.9">resources/alicat-control.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2272" y="406.9">Control dialog: interval, tolerance, correction</tspan><tspan x="2272" y="424.4">delay, attempts, external-change policy.</tspan></text>
+<text class="code" font-size="12" fill="#495057"><tspan x="2272" y="444.1">+ nodes/alicat-control.html ·</tspan><tspan x="2272" y="459.1">nodes/locales/en-US/</tspan><tspan x="2272" y="474.1">alicat-control.{json,html}</tspan></text>
+<rect x="1280" y="598" width="2260" height="240" rx="10" fill="#e7f5ff" stroke="#1971c2" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#1971c2"><tspan x="1300" y="636.5">Node-RED nodes (runtime)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1300" y="660.0">One file per node type. All but the config node are built by defineDeviceNode().</tspan></text>
+<rect x="1300" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="710.0">nodes/alicat-device.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="732.0">Config node: one instrument (host, port, unit</tspan><tspan x="1312" y="749.5">ID, settings). Hooks the registry to</tspan><tspan x="1312" y="767.0">RED.events; takes the lease on first use.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="787.1">uses: node-red/settings · node-red/props ·</tspan><tspan x="1312" y="802.1">alicat/profiles/legacy · alicat/statistics · AlicatDevice</tspan></text>
+<rect x="1620" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="710.0">nodes/alicat-read.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="732.0">Live values: subscribes on an interval or</tspan><tspan x="1632" y="749.5">reads on input; optional change filter; can</tspan><tspan x="1632" y="767.0">publish to context.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1632" y="787.1">uses: node-red/settings · node-red/status</tspan></text>
+<rect x="1940" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="710.0">nodes/alicat-setpoint.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="732.0">Writes a setpoint, switching the control</tspan><tspan x="1952" y="749.5">variable first if asked; can save it as the</tspan><tspan x="1952" y="767.0">power-up value.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1952" y="787.1">uses: node-red/props · node-red/status · errors ·</tspan><tspan x="1952" y="802.1">alicat/statistics</tspan></text>
+<rect x="2260" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2272" y="710.0">nodes/alicat-command.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2272" y="732.0">Named commands (tare, valve, gas,</tspan><tspan x="2272" y="749.5">totalizer reset, display lock) or a raw {id,</tspan><tspan x="2272" y="767.0">arg}.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2272" y="787.1">uses: node-red/props · errors · util/own</tspan></text>
+<rect x="2580" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2592" y="710.0">nodes/alicat-pid.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2592" y="732.0">Reads the PID gains, writes P, D and I with</tspan><tspan x="2592" y="749.5">read-back, or sets the loop algorithm.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2592" y="769.1">uses: node-red/props · errors · alicat/commands ·</tspan><tspan x="2592" y="784.1">util/own</tspan></text>
+<rect x="2900" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2912" y="710.0">nodes/alicat-status.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2912" y="732.0">Sends connection and device state, identity</tspan><tspan x="2912" y="749.5">changes and periodic stats; topics</tspan><tspan x="2912" y="767.0">reconnect and identify act.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2912" y="787.1">uses: node-red/settings · node-red/message</tspan></text>
+<rect x="3220" y="685" width="300" height="133" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3232" y="710.0">nodes/alicat-control.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3232" y="732.0">Wraps a Reconciler: msg.payload sets the</tspan><tspan x="3232" y="749.5">desired state; its events become messages</tspan><tspan x="3232" y="767.0">and the status.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3232" y="787.1">uses: node-red/settings · node-red/props ·</tspan><tspan x="3232" y="802.1">node-red/status · errors</tspan></text>
+<rect x="1660" y="908" width="1300" height="393" rx="10" fill="#e3fafc" stroke="#0c8599" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#0c8599"><tspan x="1680" y="946.5">lib/node-red/: node scaffolding</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1680" y="970.0">Shared by the nodes: settings checks, the input pipeline, msg.alicat, status dots, editor endpoints.</tspan></text>
+<rect x="2000" y="995" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1020.0">lib/node-red/device-node.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1042.0">defineDeviceNode(): settings checked first,</tspan><tspan x="2012" y="1059.5">lazy lease, owner token, one input pipeline</tspan><tspan x="2012" y="1077.0">(handleInput), a fixed close order.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="1097.1">uses: errors</tspan></text>
+<rect x="2640" y="995" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2652" y="1020.0">lib/node-red/admin-api.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2652" y="1042.0">Editor endpoints: POST</tspan><tspan x="2652" y="1059.5">/alicat-modbus/probe (Test connection);</tspan><tspan x="2652" y="1077.0">GET gases and meta for the dropdowns.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2652" y="1097.1">uses: alicat/gases · alicat/profiles/legacy ·</tspan><tspan x="2652" y="1112.1">alicat/statistics · AlicatDevice</tspan></text>
+<rect x="1680" y="1148" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1173.0">lib/node-red/status.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1195.0">StatusReporter: the only place that turns link</tspan><tspan x="1692" y="1212.5">and device state into a status dot.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1692" y="1232.1">uses: util/own · errors</tspan><tspan x="1692" y="1247.1">also used by: alicat-read · alicat-setpoint ·</tspan><tspan x="1692" y="1262.1">alicat-control</tspan></text>
+<rect x="2000" y="1148" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1173.0">lib/node-red/settings.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1195.0">The BOUNDS table (mirrored in the editor)</tspan><tspan x="2012" y="1212.5">and settingsReader, which reports every</tspan><tspan x="2012" y="1230.0">bad setting at once.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="1250.1">also used by: alicat-device · alicat-read ·</tspan><tspan x="2012" y="1265.1">alicat-status · alicat-control</tspan></text>
+<rect x="2320" y="1148" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1173.0">lib/node-red/props.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1195.0">Evaluates TypedInput properties; parses</tspan><tspan x="2332" y="1212.5">numbers and unit labels from inputs.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2332" y="1232.1">uses: errors</tspan><tspan x="2332" y="1247.1">also used by 5 files</tspan></text>
+<rect x="2640" y="1148" width="300" height="133" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2652" y="1173.0">lib/node-red/message.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2652" y="1195.0">The msg.alicat contract: {…meta, op,</tspan><tspan x="2652" y="1212.5">outcome, result}; on failure attachError</tspan><tspan x="2652" y="1230.0">replaces it with {…meta, op, error}.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2652" y="1250.1">uses: errors</tspan><tspan x="2652" y="1265.1">also used by: alicat-status</tspan></text>
+<rect x="3000" y="908" width="660" height="393" rx="10" fill="#e6fcf5" stroke="#099268" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#099268"><tspan x="3020" y="946.5">Node helpers</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="3020" y="970.0">Plain Node.js, each used by one node.</tspan></text>
+<rect x="3020" y="995" width="300" height="133" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3032" y="1020.0">lib/ContextPublisher.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3032" y="1042.0">Writes each frozen snapshot to flow or</tspan><tspan x="3032" y="1059.5">global context; one writer per key.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3032" y="1079.1">uses: errors</tspan></text>
+<rect x="3340" y="995" width="300" height="133" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3352" y="1020.0">lib/Reconciler.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3352" y="1042.0">Holds the desired variable, valve and</tspan><tspan x="3352" y="1059.5">setpoint; corrects the device toward them,</tspan><tspan x="3352" y="1077.0">one at a time; reports drift.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3352" y="1097.1">uses: errors · alicat/statistics · alicat/status-bits ·</tspan><tspan x="3352" y="1112.1">alicat/setpoint · util/defaults</tspan></text>
+<rect x="1280" y="1371" width="340" height="636" rx="10" fill="#ebfbee" stroke="#2f9e44" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#2f9e44"><tspan x="1300" y="1409.5">Connections</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1300" y="1433.0">Shared by every node using an instrument.</tspan></text>
+<rect x="1300" y="1641" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="1666.0">lib/ConnectionRegistry.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="1688.0">Process-wide: one {client, device} per</tspan><tspan x="1312" y="1705.5">host:port, handed out as leases. Parks</tspan><tspan x="1312" y="1723.0">entries across deploys; one config per</tspan><tspan x="1312" y="1740.5">address.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="1760.1">uses: errors · util/timers</tspan></text>
+<rect x="1660" y="1371" width="980" height="636" rx="10" fill="#ebfbee" stroke="#2f9e44" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#2f9e44"><tspan x="1680" y="1409.5">AlicatDevice and lib/device/</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1680" y="1433.0">One instrument on a connection. AlicatDevice owns the state and the API; lib/device/ does the work (pure functions, or through a DeviceHost object).</tspan></text>
+<rect x="1680" y="1458" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1483.0">lib/device/identify.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1505.0">Pure identification over a read() callback:</tspan><tspan x="1692" y="1522.5">Gen-2 from firmware registers and info</tspan><tspan x="1692" y="1540.0">blocks, Gen-1 by counting slots.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1692" y="1560.1">uses: errors · alicat/codec · alicat/firmware ·</tspan><tspan x="1692" y="1575.1">alicat/registers · modbus/exceptions ·</tspan><tspan x="1692" y="1590.1">alicat/statistics · alicat/profiles/modern ·</tspan><tspan x="1692" y="1605.1">alicat/profiles/legacy</tspan></text>
+<rect x="2000" y="1458" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1483.0">lib/device/live.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1505.0">Decodes the live block into a frozen</tspan><tspan x="2012" y="1522.5">Snapshot; builds stale and offline copies of</tspan><tspan x="2012" y="1540.0">the last good one.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="1560.1">uses: errors · alicat/gases · alicat/status-bits ·</tspan><tspan x="2012" y="1575.1">alicat/profiles/modern · alicat/profiles/legacy</tspan></text>
+<rect x="2320" y="1458" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1483.0">lib/device/poller.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1505.0">LivePoller: one poll loop at the fastest</tspan><tspan x="2332" y="1522.5">subscriber interval, fanned out; one</tspan><tspan x="2332" y="1540.0">stale/offline snapshot on failure.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2332" y="1560.1">uses: PriorityQueue · util/timers</tspan></text>
+<rect x="2000" y="1641" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1666.0">lib/AlicatDevice.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1688.0">One instrument: its state (identity, timers,</tspan><tspan x="2012" y="1705.5">the lane) and public API. Identifies on every</tspan><tspan x="2012" y="1723.0">connect.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="1743.1">uses: errors · PriorityQueue · alicat/registers ·</tspan><tspan x="2012" y="1758.1">modbus/exceptions · modbus/pdu · util/defaults ·</tspan><tspan x="2012" y="1773.1">util/timers · alicat/statistics</tspan><tspan x="2012" y="1788.1">also used by: alicat-device · node-red/admin-api</tspan></text>
+<rect x="1680" y="1824" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1849.0">lib/device/options.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1692" y="1871.0">Device settings: defaults, validation, and</tspan><tspan x="1692" y="1888.5">which changes force a re-identification.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1692" y="1908.1">uses: errors · alicat/profiles/legacy · alicat/statistics ·</tspan><tspan x="1692" y="1923.1">util/defaults</tspan></text>
+<rect x="2000" y="1824" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1849.0">lib/device/setpoint.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="1871.0">Setpoint write with range check, clamping</tspan><tspan x="2012" y="1888.5">and read-back; the bumpless</tspan><tspan x="2012" y="1906.0">control-variable switch.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="1926.1">uses: errors · PriorityQueue · alicat/codec ·</tspan><tspan x="2012" y="1941.1">alicat/firmware · alicat/statistics · alicat/registers ·</tspan><tspan x="2012" y="1956.1">alicat/commands · alicat/units · alicat/setpoint ·</tspan><tspan x="2012" y="1971.1">util/timers</tspan></text>
+<rect x="2320" y="1824" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1849.0">lib/device/commands.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2332" y="1871.0">Commands over the lane, confirmed by</tspan><tspan x="2332" y="1888.5">effect: valve by status bits, gas by register,</tspan><tspan x="2332" y="1906.0">PID by read-back.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2332" y="1926.1">uses: errors · PriorityQueue · alicat/codec ·</tspan><tspan x="2332" y="1941.1">alicat/firmware · alicat/registers · alicat/commands ·</tspan><tspan x="2332" y="1956.1">alicat/gases · alicat/status-bits · util/own · util/timers</tspan></text>
+<rect x="2680" y="1371" width="340" height="636" rx="10" fill="#ebfbee" stroke="#2f9e44" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#2f9e44"><tspan x="2700" y="1409.5">CommandLane and lib/lane/</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="2700" y="1433.0">Commands, one at a time.</tspan></text>
+<rect x="2700" y="1458" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1483.0">lib/lane/session.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1505.0">LaneSession, one command: wait out a</tspan><tspan x="2712" y="1522.5">foreign one, NOP and settle, write, poll the</tspan><tspan x="2712" y="1540.0">echo, map failures.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2712" y="1560.1">uses: errors · PriorityQueue · alicat/commands ·</tspan><tspan x="2712" y="1575.1">util/timers</tspan></text>
+<rect x="2700" y="1641" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1666.0">lib/CommandLane.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1688.0">One command at a time per instrument;</tspan><tspan x="2712" y="1705.5">URGENT valve jobs jump the queue and</tspan><tspan x="2712" y="1723.0">pre-empt the running one.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2712" y="1743.1">uses: errors · PriorityQueue</tspan></text>
+<rect x="2700" y="1824" width="300" height="163" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1849.0">lib/lane/interface.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2712" y="1871.0">EXTENDED (1002+, Gen-2) and LIMITED</tspan><tspan x="2712" y="1888.5">(1000+, Gen-1) command registers: encode,</tspan><tspan x="2712" y="1906.0">decode the echo, completion.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2712" y="1926.1">uses: errors · alicat/registers · alicat/codec</tspan></text>
+<rect x="1280" y="2077" width="660" height="393" rx="10" fill="#fff9db" stroke="#f08c00" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#f08c00"><tspan x="1300" y="2115.5">AlicatClient</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1300" y="2138.9">One supervised connection per instrument.</tspan></text>
+<rect x="1300" y="2164" width="300" height="133" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2188.9">lib/AlicatClient.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2210.9">State machine, queue pump, one request in</tspan><tspan x="1312" y="2228.4">flight, 20 ms pacing, heartbeat, link-suspect</tspan><tspan x="1312" y="2245.9">detection, backoff.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="2266.1">uses: errors · modbus/pdu · modbus/exceptions ·</tspan><tspan x="1312" y="2281.1">alicat/registers · util/defaults · util/timers</tspan></text>
+<rect x="1300" y="2317" width="300" height="133" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2341.9">lib/PriorityQueue.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2363.9">URGENT, CONTROL, POLL: coalescing,</tspan><tspan x="1312" y="2381.4">latest-wins replace, deadlines, aging,</tspan><tspan x="1312" y="2398.9">bounded at 200. Exports Priority.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="2419.1">uses: errors</tspan><tspan x="1312" y="2434.1">also used by 7 files</tspan></text>
+<rect x="1620" y="2317" width="300" height="133" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2341.9">lib/Backoff.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2363.9">Reconnect delay: doubling with equal jitter,</tspan><tspan x="1632" y="2381.4">capped.</tspan></text>
+<rect x="1980" y="2077" width="660" height="393" rx="10" fill="#fff4e6" stroke="#e8590c" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#e8590c"><tspan x="2000" y="2115.5">lib/modbus/</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="2000" y="2138.9">Modbus TCP, FC04 and FC16 only.</tspan></text>
+<rect x="2000" y="2164" width="300" height="133" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="2188.9">lib/modbus/ModbusTcpTransport.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="2210.9">One single-use socket: MBAP framing,</tspan><tspan x="2012" y="2228.4">replies matched on transaction ID and</tspan><tspan x="2012" y="2245.9">function code, per-request timeouts.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="2266.1">uses: errors · modbus/pdu · util/timers</tspan><tspan x="2012" y="2281.1">also used by: alicat-probe</tspan></text>
+<rect x="2000" y="2317" width="300" height="133" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2012" y="2341.9">lib/modbus/pdu.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2012" y="2363.9">FC04 and FC16 PDUs, MBAP frames, and</tspan><tspan x="2012" y="2381.4">FrameParser for split and merged TCP</tspan><tspan x="2012" y="2398.9">chunks.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2012" y="2419.1">uses: errors · modbus/exceptions</tspan><tspan x="2012" y="2434.1">used by 5 files</tspan></text>
+<rect x="2320" y="2317" width="300" height="133" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2332" y="2341.9">lib/modbus/exceptions.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2332" y="2363.9">Modbus exception codes and their names.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2332" y="2384.1">used by 6 files</tspan></text>
+<rect x="2680" y="2077" width="340" height="393" rx="10" fill="#fff5f5" stroke="#e03131" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#e03131"><tspan x="2700" y="2115.5">On the wire</tspan></text>
+<rect x="2700" y="2164" width="300" height="133" rx="10" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="2712" y="2190.8">Alicat instrument</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2712" y="2212.9">Gen-2 (firmware 10v07 and later, e.g.</tspan><tspan x="2712" y="2230.4">10v20) or Gen-1 (e.g. 9v07) flow or pressure</tspan><tspan x="2712" y="2247.9">controller. In tests and npm run dev:</tspan><tspan x="2712" y="2265.4">tools/sim/AlicatSimulator.js.</tspan></text>
+<rect x="1280" y="2540" width="1300" height="558" rx="10" fill="#f8f9fa" stroke="#495057" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#495057"><tspan x="1300" y="2578.5">lib/alicat/: the instrument as data</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1300" y="2601.9">Registers, codecs, commands and tables from the Alicat manual. Pure, no I/O.</tspan></text>
+<rect x="1300" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2651.9">lib/alicat/registers.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2673.9">Register numbers and block layouts</tspan><tspan x="1312" y="2691.4">(1-based); toAddress() gives the 0-based</tspan><tspan x="1312" y="2708.9">PDU address.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="2729.1">uses: errors</tspan><tspan x="1312" y="2744.1">used by 12 files</tspan></text>
+<rect x="1620" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2651.9">lib/alicat/codec.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2673.9">Big-endian u16, u32, i32 and float32 decode</tspan><tspan x="1632" y="2691.4">and encode; NaN and INT32 sentinels;</tspan><tspan x="1632" y="2708.9">word-order check.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1632" y="2729.1">uses: errors</tspan><tspan x="1632" y="2744.1">used by 12 files</tspan></text>
+<rect x="1940" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2651.9">lib/alicat/commands.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2673.9">Command catalogue: IDs, arguments,</tspan><tspan x="1952" y="2691.4">priority, minimum firmware; denied IDs;</tspan><tspan x="1952" y="2708.9">raw-command checks.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1952" y="2729.1">uses: errors · PriorityQueue · util/own</tspan><tspan x="1952" y="2744.1">used by 5 files</tspan></text>
+<rect x="2260" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2272" y="2651.9">lib/alicat/statistics.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2272" y="2673.9">Statistic codes (manual appendix A); control</tspan><tspan x="2272" y="2691.4">variables and their loop arguments.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2272" y="2711.1">uses: errors · util/own</tspan><tspan x="2272" y="2726.1">used by 10 files</tspan></text>
+<rect x="1300" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2804.9">lib/alicat/status-bits.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2826.9">Status and alarm bits per generation (hold:</tspan><tspan x="1312" y="2844.4">bit 8, exhaust: bit 10); isValveState().</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="2864.1">used by: Reconciler · device/live ·</tspan><tspan x="1312" y="2879.1">device/commands · alicat-probe</tspan></text>
+<rect x="1620" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2804.9">lib/alicat/firmware.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2826.9">Firmware versions (e.g. 10v20.0): parse,</tspan><tspan x="1632" y="2844.4">compare, per-feature minimums, plausible</tspan><tspan x="1632" y="2861.9">Gen-2.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1632" y="2882.1">uses: errors · alicat/codec</tspan><tspan x="1632" y="2897.1">used by: device/identify · device/setpoint ·</tspan><tspan x="1632" y="2912.1">device/commands · alicat-probe</tspan></text>
+<rect x="1940" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2804.9">lib/alicat/units.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2826.9">Engineering-unit codes (appendix B) and</tspan><tspan x="1952" y="2844.4">labels with the pressure reference (PSIG).</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1952" y="2864.1">used by: device/setpoint · alicat/profiles/modern</tspan></text>
+<rect x="2260" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2272" y="2804.9">lib/alicat/gases.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2272" y="2826.9">Gas numbers (appendix D): describe,</tspan><tspan x="2272" y="2844.4">resolve a number, symbol or name; list for</tspan><tspan x="2272" y="2861.9">the editor.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2272" y="2882.1">uses: errors</tspan><tspan x="2272" y="2897.1">used by: node-red/admin-api · device/live ·</tspan><tspan x="2272" y="2912.1">device/commands · sim/CommandEngine</tspan></text>
+<rect x="1300" y="2948" width="300" height="130" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2972.9">lib/alicat/setpoint.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1312" y="2994.9">When a read-back setpoint counts as the</tspan><tspan x="1312" y="3012.4">one written: float32 rounding, displayed</tspan><tspan x="1312" y="3029.9">decimals.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1312" y="3050.1">used by: Reconciler · device/setpoint</tspan></text>
+<rect x="1620" y="2948" width="300" height="130" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2972.9">lib/alicat/profiles/modern.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1632" y="2994.9">Gen-2: parse the 12-register info blocks,</tspan><tspan x="1632" y="3012.4">decode the 26-register live block.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1632" y="3032.1">uses: alicat/codec · alicat/registers · alicat/statistics</tspan><tspan x="1632" y="3047.1">· alicat/units</tspan><tspan x="1632" y="3062.1">used by: device/identify · device/live</tspan></text>
+<rect x="1940" y="2948" width="300" height="130" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2972.9">lib/alicat/profiles/legacy.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1952" y="2994.9">Gen-1 data frame: slot keys, layout presets,</tspan><tspan x="1952" y="3012.4">layout from the slot count, live decoding.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1952" y="3032.1">uses: errors · alicat/codec · alicat/registers ·</tspan><tspan x="1952" y="3047.1">alicat/statistics · util/own</tspan><tspan x="1952" y="3062.1">used by 5 files</tspan></text>
+<rect x="2620" y="2540" width="660" height="558" rx="10" fill="#f8f9fa" stroke="#495057" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#495057"><tspan x="2640" y="2578.5">Shared</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="2640" y="2601.9">Errors, small utilities, typedef-only modules.</tspan></text>
+<rect x="2640" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2651.9">lib/errors.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2673.9">AlicatError: a closed set of codes, structured</tspan><tspan x="2652" y="2691.4">details, the write outcome; classifying</tspan><tspan x="2652" y="2708.9">helpers.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2652" y="2729.1">used by 32 files</tspan></text>
+<rect x="2960" y="2627" width="300" height="133" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2651.9">lib/util/timers.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2673.9">unref(), an abortable sleep() and the</tspan><tspan x="2972" y="2691.4">pollUntil() retry loop.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2972" y="2711.1">used by 9 files</tspan></text>
+<rect x="2640" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2804.9">lib/util/defaults.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2826.9">withDefaults(): known, defined keys over the</tspan><tspan x="2652" y="2844.4">defaults.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2652" y="2864.1">used by: Reconciler · AlicatDevice · device/options ·</tspan><tspan x="2652" y="2879.1">AlicatClient</tspan></text>
+<rect x="2960" y="2780" width="300" height="148" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2804.9">lib/util/own.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2826.9">own(): own-property lookups, so a name like</tspan><tspan x="2972" y="2844.4">&quot;constructor&quot; never resolves.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2972" y="2864.1">used by 7 files</tspan></text>
+<rect x="2640" y="2948" width="300" height="130" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2972.9">lib/device/types.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2652" y="2994.9">Typedefs only: settings, Identity, Snapshot,</tspan><tspan x="2652" y="3012.4">results, DeviceHost.</tspan></text>
+<rect x="2960" y="2948" width="300" height="130" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2972.9">lib/node-red/types.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2972" y="2994.9">Typedefs only: the Node-RED runtime API,</tspan><tspan x="2972" y="3012.4">the config node, DeviceMeta.</tspan></text>
+<polyline points="1415,824 1450,1635" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1485,824 2790,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1735,824 2075,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1805,824 3170,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2090,824 2105,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2410,824 2135,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2730,824 2165,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3050,824 2195,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3318,824 2225,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3370,824 3455,989" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2087,1134 1830,1142" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2129,1134 2150,1142" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2213,1134 2755,1142" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2171,1134 2470,1142" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2790,1134 2825,1142" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1450,1810 1450,2158" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1606,1723 1994,1723" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2306,1723 2694,1723" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2098,1810 1830,1818" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2098,1635 1830,1627" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2150,1635 2150,1627" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2203,1635 2470,1627" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2150,1810 2150,1818" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2203,1810 2470,1818" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2314,1540 2306,1540" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2306,1906 2314,1906" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2850,1810 2850,1818" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2850,1635 2850,1627" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1606,2215 1994,2215" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1485,2303 1770,2311" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1415,2303 1450,2311" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="1994,2246 1606,2246" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="1753" y="2236" width="94" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1800" y="2250.0">down · warning</tspan></text>
+<polyline points="3525,989 3423,824" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="3427" y="896" width="95" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3474.5" y="910.0">event · warning</tspan></text>
+<polyline points="2306,2231 2694,2231" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2458" y="2221" width="84" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2500" y="2235.0">TCP port 502</tspan></text>
+</svg>

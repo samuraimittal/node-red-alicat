@@ -1,0 +1,42 @@
+[
+    {
+        "id": "ex4-comment", "type": "comment", "name": "PID gains: read, write (with read-back), algorithm",
+        "info": "In Alicat's default PD/PDF loop, the D gain acts like a classical P term and the P gain like a classical I term. Change gains in small steps.\n\nThe write button uses example gains for the simulator. On a real instrument, read the gains first and note them, change them in small steps, and write the noted values back to restore them.",
+        "x": 220, "y": 40, "wires": []
+    },
+    {
+        "id": "ex4-dev", "type": "alicat-device", "name": "Simulated MFC", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex4-in-read", "type": "inject", "name": "read gains", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 120, "y": 100, "wires": [["ex4-read"]]
+    },
+    {
+        "id": "ex4-read", "type": "alicat-pid", "name": "", "device": "ex4-dev", "action": "read", "pGain": "payload.p", "pGainType": "msg",
+        "dGain": "payload.d", "dGainType": "msg", "iGain": "payload.i", "iGainType": "msg", "algorithm": "PDF", "x": 290, "y": 100, "wires": [["ex4-debug"]]
+    },
+    {
+        "id": "ex4-in-write", "type": "inject", "name": "{p: 4000, i: 300}", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "{\"p\":4000,\"i\":300}", "payloadType": "json",
+        "x": 140, "y": 160, "wires": [["ex4-write"]]
+    },
+    {
+        "id": "ex4-write", "type": "alicat-pid", "name": "", "device": "ex4-dev", "action": "write", "pGain": "payload.p", "pGainType": "msg",
+        "dGain": "payload.d", "dGainType": "msg", "iGain": "payload.i", "iGainType": "msg", "algorithm": "PDF", "x": 300, "y": 160, "wires": [["ex4-debug"]]
+    },
+    {
+        "id": "ex4-in-alg", "type": "inject", "name": "use PD/PDF", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 120, "y": 220, "wires": [["ex4-alg"]]
+    },
+    {
+        "id": "ex4-alg", "type": "alicat-pid", "name": "", "device": "ex4-dev", "action": "algorithm", "pGain": "payload.p", "pGainType": "msg",
+        "dGain": "payload.d", "dGainType": "msg", "iGain": "payload.i", "iGainType": "msg", "algorithm": "PDF", "x": 300, "y": 220, "wires": [["ex4-debug"]]
+    },
+    {
+        "id": "ex4-debug", "type": "debug", "name": "{p, d, i}", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "payload", "targetType": "msg", "x": 500, "y": 160, "wires": []
+    }
+]

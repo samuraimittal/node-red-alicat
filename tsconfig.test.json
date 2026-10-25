@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "types": ["node", "mocha"],
+        // An out-of-range index in a test fails its assertion; guards would only add noise.
+        "noUncheckedIndexedAccess": false
+    },
+    "include": ["test/**/*.js", "test/**/*.d.ts", "eslint.config.js"]
+}

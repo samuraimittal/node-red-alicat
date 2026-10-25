@@ -1,0 +1,38 @@
+{
+    "alicat-control": {
+        "paletteLabel": "maintain",
+        "label": {
+            "default": "maintain state",
+            "interval": "Check every",
+            "tolerance": "Tolerance",
+            "correctionMs": "Retry after",
+            "maxAttempts": "Report failure after",
+            "onExternalChange": "If changed elsewhere",
+            "switchMode": "Mode switch"
+        },
+        "unit": {
+            "ms": "ms",
+            "doubling": "ms, doubling to 10 s",
+            "attempts": "attempts"
+        },
+        "placeholder": {
+            "tolerance": "auto"
+        },
+        "tip": {
+            "tolerance": "setpoint units; empty = half the device's last digit"
+        },
+        "onExternalChange": {
+            "revert": "Revert to the desired state",
+            "adopt": "Adopt it (stop maintaining that part)",
+            "report": "Only report it"
+        },
+        "switchMode": {
+            "bumpless": "Bumpless (hold valve during the switch)",
+            "direct": "Direct"
+        },
+        "port": {
+            "input": "desired state",
+            "output": "events"
+        }
+    }
+}

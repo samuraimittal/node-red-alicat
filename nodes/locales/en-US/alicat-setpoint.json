@@ -1,0 +1,41 @@
+{
+    "alicat-setpoint": {
+        "paletteLabel": "setpoint",
+        "label": {
+            "default": "setpoint",
+            "forVariable": "setpoint (__variable__)",
+            "value": "Setpoint",
+            "variable": "Controls",
+            "switchMode": "Mode switch",
+            "outOfRange": "Out of range",
+            "verify": "Verify",
+            "savePowerUp": "Power-up"
+        },
+        "variable": {
+            "current": "Keep the device's current mode",
+            "massFlow": "Mass flow",
+            "volumetricFlow": "Volumetric flow",
+            "absolutePressure": "Absolute pressure",
+            "gaugePressure": "Gauge pressure",
+            "differentialPressure": "Differential pressure",
+            "valveDrive": "Valve drive (open loop, %)",
+            "msg": "From msg.variable"
+        },
+        "switchMode": {
+            "bumpless": "Bumpless: hold valve, switch, set, resume",
+            "direct": "Direct"
+        },
+        "outOfRange": {
+            "reject": "Reject (error)",
+            "clamp": "Clamp to the device range"
+        },
+        "tip": {
+            "verify": "read the setpoint back from the device",
+            "savePowerUp": "also save as power-up setpoint (writes EEPROM; don't use on every change)"
+        },
+        "port": {
+            "input": "setpoint",
+            "output": "setpoint written"
+        }
+    }
+}

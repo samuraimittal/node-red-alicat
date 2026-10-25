@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1778" height="892" viewBox="-24 3226 1778 892">
+<title>2 · Read path: from a poll to msg.alicat</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="-24" y="3226" width="1778" height="892" fill="#ffffff"/>
+<text class="body" x="0" y="3282" font-size="24" fill="#1e1e1e">2 · Read path: from a poll to msg.alicat</text>
+<rect x="0" y="3298" width="1730" height="796" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="40" y="3352.8">A read node on an interval. Every subscriber of an instrument shares one poll loop; the control node's Reconciler subscribes the same way.</tspan></text>
+<rect x="40" y="3388" width="330" height="120" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="52" y="3412.9">1 · nodes/alicat-read.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="52" y="3434.0">subscribe · readLive</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="3455.9">Interval trigger: subscribes once, at deploy. Input</tspan><tspan x="52" y="3473.4">trigger: every message calls device.readLive()</tspan><tspan x="52" y="3490.9">instead.</tspan></text>
+<rect x="480" y="3388" width="330" height="120" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="3412.9">2 · lib/device/poller.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="3434.0">LivePoller · _schedule · _pollOnce</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="3455.9">One loop per instrument at the fastest interval</tspan><tspan x="492" y="3473.4">any subscriber asks for (≥ 100 ms); slower ones</tspan><tspan x="492" y="3490.9">are served from the same snapshots.</tspan></text>
+<rect x="920" y="3388" width="330" height="120" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="3412.9">3 · lib/AlicatDevice.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="3434.0">readLive · buildReadInputRegisters</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="3455.9">FC04 read of the live block (Gen-2: standard</tspan><tspan x="932" y="3473.4">readings; Gen-1: the data frame) at POLL</tspan><tspan x="932" y="3490.9">priority, coalesced per instrument.</tspan></text>
+<rect x="1360" y="3388" width="330" height="120" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3412.9">4 · lib/PriorityQueue.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="3434.0">push · _pick</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3455.9">POLL level: identical reads share one request; a</tspan><tspan x="1372" y="3473.4">poll waiting over 3 s goes next; at most 200</tspan><tspan x="1372" y="3490.9">queued.</tspan></text>
+<rect x="1360" y="3568" width="330" height="120" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3592.9">5 · lib/AlicatClient.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="3614.0">request · _pump · _dispatch</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3635.9">One request in flight, at least 20 ms apart, 1 s</tspan><tspan x="1372" y="3653.4">timeout. Offline (BACKOFF): polls are dropped.</tspan></text>
+<rect x="920" y="3568" width="330" height="120" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="3592.9">6 · lib/modbus/ModbusTcpTransport.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="3614.0">send · _onFrame</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="3635.9">MBAP frame with a 16-bit transaction ID; the</tspan><tspan x="932" y="3653.4">reply is matched on ID and function code; a late</tspan><tspan x="932" y="3670.9">reply gets 250 ms.</tspan></text>
+<rect x="480" y="3568" width="330" height="120" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="492" y="3594.8">Instrument or simulator</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="3616.9">Answers with the registers, or exception 02 if the</tspan><tspan x="492" y="3634.4">block isn't there (then the device re-identifies).</tspan></text>
+<rect x="480" y="3748" width="330" height="120" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="3772.9">7 · lib/device/live.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="3794.0">decodeSnapshot · freezeSnapshot</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="3815.9">Words to engineering values, units, status bits</tspan><tspan x="492" y="3833.4">and alarms; a frozen Snapshot with quality good</tspan><tspan x="492" y="3850.9">and rttMs.</tspan></text>
+<rect x="920" y="3748" width="330" height="120" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="3772.9">8 · lib/device/poller.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="3794.0">_deliver</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="3815.9">Hands the snapshot to each subscriber whose</tspan><tspan x="932" y="3833.4">interval is due.</tspan></text>
+<rect x="1360" y="3748" width="330" height="120" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3772.9">9 · nodes/alicat-read.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="3794.0">changed · build · info</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3815.9">Skips an unchanged value if asked; msg.alicat =</tspan><tspan x="1372" y="3833.4">{…meta, op, result} (lib/node-red/message.js);</tspan><tspan x="1372" y="3850.9">send.</tspan></text>
+<rect x="1360" y="3928" width="330" height="126" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3952.9">10 · lib/ContextPublisher.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="3974.0">publish</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="3995.9">Optional: after the send, writes the snapshot to</tspan><tspan x="1372" y="4013.4">flow or global context.</tspan></text>
+<rect x="920" y="3928" width="330" height="126" rx="10" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="932" y="3954.8">Read failed</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="3976.9">lib/device/poller.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="3998.0">deliverQuality</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="4019.9">Timeout or link down: each subscriber gets one</tspan><tspan x="932" y="4037.4">stale (or offline) snapshot, not a stream of errors.</tspan></text>
+<polyline points="376,3448 474,3448" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="394" y="3438" width="62" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="425" y="3452.0">subscribe</tspan></text>
+<polyline points="816,3448 914,3448" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="823" y="3438" width="84" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865" y="3452.0">every interval</tspan></text>
+<polyline points="1256,3448 1354,3448" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="1265" y="3438" width="80" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1305" y="3452.0">FC04, POLL</tspan></text>
+<polyline points="1525,3514 1525,3562" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="1354,3628 1256,3628" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="914,3628 816,3628" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="849" y="3618" width="33" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865.5" y="3632.0">TCP</tspan></text>
+<polyline points="645,3694 645,3742" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="574" y="3708" width="143" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="645.5" y="3722.0">reply, back up the stack</tspan></text>
+<polyline points="816,3808 914,3808" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="835" y="3798" width="61" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865.5" y="3812.0">Snapshot</tspan></text>
+<polyline points="1256,3808 1354,3808" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="1525,3874 1525,3922" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="1085,3874 1085,3922" fill="none" stroke="#e03131" stroke-width="2" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-failure)"/>
+<rect x="1052" y="3888" width="67" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1085.5" y="3902.0">read failed</tspan></text>
+</svg>

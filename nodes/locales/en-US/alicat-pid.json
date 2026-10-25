@@ -1,0 +1,31 @@
+{
+    "alicat-pid": {
+        "paletteLabel": "PID",
+        "label": {
+            "read": "read PID gains",
+            "write": "write PID gains",
+            "algorithmNode": "PID algorithm",
+            "action": "Action",
+            "pGain": "P gain",
+            "dGain": "D gain",
+            "iGain": "I gain",
+            "algorithm": "Algorithm"
+        },
+        "action": {
+            "read": "Read P, D and I gains",
+            "write": "Write gains",
+            "algorithm": "Set loop algorithm"
+        },
+        "algorithm": {
+            "PDF": "PD/PDF (Alicat default)",
+            "PD2I": "PD²I"
+        },
+        "tip": {
+            "gains": "A gain that is empty or evaluates to nothing is left unchanged. Gains are integers 0–65535."
+        },
+        "port": {
+            "input": "trigger, or gains to write",
+            "output": "gains"
+        }
+    }
+}

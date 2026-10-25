@@ -1,0 +1,63 @@
+{
+    "alicat-read": {
+        "paletteLabel": "read",
+        "label": {
+            "default": "alicat read",
+            "identity": "identity",
+            "every": "__what__ every __seconds__ s",
+            "dataset": "Read",
+            "trigger": "When",
+            "interval": "Interval (ms)",
+            "emit": "Send",
+            "output": "Output",
+            "reading": "Reading",
+            "contextKey": "Publish to",
+            "contextStore": "Store"
+        },
+        "dataset": {
+            "live": "Live readings",
+            "identity": "Identity (firmware, serial, units, ranges)"
+        },
+        "trigger": {
+            "interval": "Every interval (and on input)",
+            "input": "Only when a message arrives"
+        },
+        "emit": {
+            "always": "Every reading",
+            "change": "Only when something changes"
+        },
+        "output": {
+            "object": "All readings as an object",
+            "value": "One reading as a number"
+        },
+        "reading": {
+            "massFlow": "Mass flow",
+            "volumetricFlow": "Volumetric flow",
+            "absolutePressure": "Absolute pressure",
+            "gaugePressure": "Gauge pressure",
+            "differentialPressure": "Differential pressure",
+            "barometricPressure": "Barometric pressure",
+            "pressure": "Pressure (Gen-1 pc/pg layouts)",
+            "temperature": "Temperature",
+            "setpoint": "Setpoint",
+            "valveDrive": "Valve drive",
+            "totalMass": "Totalizer (mass)",
+            "relativeHumidity": "Relative humidity"
+        },
+        "scope": {
+            "global": "global",
+            "flow": "flow"
+        },
+        "placeholder": {
+            "topic": "default: device name, or the reading",
+            "contextKey": "optional, e.g. alicat.station1"
+        },
+        "tip": {
+            "interval": "min 100"
+        },
+        "port": {
+            "input": "read now",
+            "output": "readings"
+        }
+    }
+}

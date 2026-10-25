@@ -1,0 +1,61 @@
+[
+    {
+        "id": "ex3-comment", "type": "comment", "name": "Commands: tare, totalizer, gas, front panel",
+        "info": "Each command sends a NOP first, waits a device cycle, then waits until the device confirms the command.\n\nTare flow only when nothing is flowing. Tare and totalizer reset are never repeated automatically.",
+        "x": 190, "y": 40, "wires": []
+    },
+    {
+        "id": "ex3-dev", "type": "alicat-device", "name": "Simulated MFC", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex3-in-tare", "type": "inject", "name": "tare", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 110, "y": 100, "wires": [["ex3-tare"]]
+    },
+    {
+        "id": "ex3-tare", "type": "alicat-command", "name": "", "device": "ex3-dev", "command": "tareFlow", "arg": "payload",
+        "argType": "msg", "allowRaw": false, "rawId": "", "rawArg": "", "fallbackSetpointZero": false, "x": 280, "y": 100,
+        "wires": [["ex3-debug"]]
+    },
+    {
+        "id": "ex3-in-tot", "type": "inject", "name": "reset totalizer", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 130, "y": 160, "wires": [["ex3-tot"]]
+    },
+    {
+        "id": "ex3-tot", "type": "alicat-command", "name": "", "device": "ex3-dev", "command": "resetTotalizer1", "arg": "payload",
+        "argType": "msg", "allowRaw": false, "rawId": "", "rawArg": "", "fallbackSetpointZero": false, "x": 330, "y": 160,
+        "wires": [["ex3-debug"]]
+    },
+    {
+        "id": "ex3-in-gas", "type": "inject", "name": "N2", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "N2", "payloadType": "str", "x": 110, "y": 220, "wires": [["ex3-gas"]]
+    },
+    {
+        "id": "ex3-in-gas2", "type": "inject", "name": "Argon", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "Argon", "payloadType": "str", "x": 110, "y": 260, "wires": [["ex3-gas"]]
+    },
+    {
+        "id": "ex3-gas", "type": "alicat-command", "name": "", "device": "ex3-dev", "command": "selectGas", "arg": "payload",
+        "argType": "msg", "allowRaw": false, "rawId": "", "rawArg": "", "fallbackSetpointZero": false, "x": 290, "y": 240,
+        "wires": [["ex3-debug"]]
+    },
+    {
+        "id": "ex3-in-lock", "type": "inject", "name": "lock panel", "props": [{ "p": "command", "v": "lockDisplay", "vt": "str" }],
+        "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "x": 120, "y": 320, "wires": [["ex3-dyn"]]
+    },
+    {
+        "id": "ex3-in-unlock", "type": "inject", "name": "unlock panel", "props": [{ "p": "command", "v": "unlockDisplay", "vt": "str" }],
+        "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "x": 130, "y": 360, "wires": [["ex3-dyn"]]
+    },
+    {
+        "id": "ex3-dyn", "type": "alicat-command", "name": "command from msg.command", "device": "ex3-dev", "command": "msg",
+        "arg": "payload", "argType": "msg", "allowRaw": false, "rawId": "", "rawArg": "", "fallbackSetpointZero": false,
+        "x": 330, "y": 340, "wires": [["ex3-debug"]]
+    },
+    {
+        "id": "ex3-debug", "type": "debug", "name": "command result (outcome, gas, duration)", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 600, "y": 220, "wires": []
+    }
+]

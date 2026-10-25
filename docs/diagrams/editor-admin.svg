@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1778" height="703" viewBox="-24 5346 1778 703">
+<title>6 · Editor: dialogs, validation and Test connection</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="-24" y="5346" width="1778" height="703" fill="#ffffff"/>
+<text class="body" x="0" y="5402" font-size="24" fill="#1e1e1e">6 · Editor: dialogs, validation and Test connection</text>
+<rect x="0" y="5418" width="1730" height="607" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="40" y="5472.8">The editor runs in the browser and reaches the runtime only through the admin HTTP endpoints.</tspan></text>
+<rect x="40" y="5508" width="330" height="120" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="5534.8">Node-RED editor</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="5556.9">Loads nodes/alicat-*.html (dialog templates with</tspan><tspan x="52" y="5574.4">data-i18n keys), the scripts in resources/, and</tspan><tspan x="52" y="5591.9">texts and help from nodes/locales/en-US/.</tspan></text>
+<rect x="480" y="5508" width="330" height="120" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="5532.9">resources/alicat-read.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="5554.0">registerType · oneditprepare</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="5575.9">One per node: defaults, labels, rows shown or</tspan><tspan x="492" y="5593.4">hidden, TypedInputs.</tspan></text>
+<rect x="920" y="5508" width="330" height="120" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="5532.9">resources/alicat-editor.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="5554.0">BOUNDS · range · fillContextStores</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="5575.9">Validators from a copy of the BOUNDS table; the</tspan><tspan x="932" y="5593.4">context-store list.</tspan></text>
+<rect x="1360" y="5508" width="330" height="120" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="5532.9">lib/node-red/settings.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="5554.0">BOUNDS · settingsReader</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="5575.9">The runtime copy: each node checks its settings</tspan><tspan x="1372" y="5593.4">on deploy. test/nodes/editor-definitions.test.js</tspan><tspan x="1372" y="5610.9">keeps the copies equal.</tspan></text>
+<rect x="480" y="5688" width="330" height="136" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="5712.9">resources/alicat-device.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="5734.0">oneditprepare</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="5755.9">Test connection: POST alicat-modbus/probe with</tspan><tspan x="492" y="5773.4">the dialog's current settings.</tspan></text>
+<rect x="920" y="5688" width="330" height="136" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="5712.9">lib/node-red/admin-api.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="5734.0">registerAdminApi · runProbe ·</tspan><tspan x="932" y="5750.3">probePortAllowed</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="5771.9">Permission alicat-device.write; port 502 unless</tspan><tspan x="932" y="5789.4">settings.alicatModbus.probePorts; one test per</tspan><tspan x="932" y="5806.9">device, two at once.</tspan></text>
+<rect x="1360" y="5688" width="330" height="136" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="5712.9">lib/ConnectionRegistry.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="5734.0">find · acquire</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="5755.9">Reuses the live connection to that host:port, or</tspan><tspan x="1372" y="5773.4">takes a short lease with probe timings and</tspan><tspan x="1372" y="5790.9">releases it.</tspan></text>
+<rect x="480" y="5884" width="330" height="101" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="492" y="5910.8">Shown in the dialog</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="5932.9">Generation, firmware, serial number and</tspan><tspan x="492" y="5950.4">controlled variable; or the error code and</tspan><tspan x="492" y="5967.9">message.</tspan></text>
+<polyline points="376,5568 474,5568" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="406" y="5558" width="38" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="425" y="5572.0">loads</tspan></text>
+<polyline points="816,5568 914,5568" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="834" y="5558" width="62" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865" y="5572.0">validators</tspan></text>
+<polyline points="1256,5568 1354,5568" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<rect x="1259" y="5558" width="92" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1305" y="5572.0">same numbers</tspan></text>
+<polyline points="205,5634 645,5682" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="386" y="5648" width="79" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="425.5" y="5662.0">config dialog</tspan></text>
+<polyline points="816,5756 914,5756" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="845" y="5746" width="41" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865.5" y="5760.0">POST</tspan></text>
+<polyline points="1256,5756 1354,5756" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="1085,5830 645,5878" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="845" y="5844" width="41" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865.5" y="5858.0">JSON</tspan></text>
+</svg>

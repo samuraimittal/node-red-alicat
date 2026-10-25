@@ -1,0 +1,36 @@
+<script type="text/markdown" data-help-name="alicat-command">
+Runs an Alicat command and waits until the device confirms it.
+
+### Inputs
+
+Any message runs the configured command.
+
+: *payload* (string | number) : for **Select gas**: a gas number, symbol (`N2`) or name (`Nitrogen`). Configurable.
+: *command* (string | object) : with **From msg.command**, a command name such as `tareFlow`, `holdClosed`, `resume` or `selectGas`. With *Allow raw*, also `{id, arg}`.
+
+### Outputs
+
+: payload.command (string) : the command that ran (`raw` for an `{id, arg}` command).
+: payload.outcome (string) : `executed` (confirmed), `accepted`, `rejected` or `unknown`.
+: payload.returnValue (number) : what the command returned, or `null` if it returns nothing.
+: payload.durationMs (number) : from sending the command until the device reported it finished.
+: payload.effect (boolean) : valve commands only: the device's status bits confirm the hold, exhaust or resume.
+: payload.queuedBehind (object) : an urgent valve command had to wait for a command the device was already running: `{id, arg}` of that command.
+: payload.fallback (string) : with *Fallback*: `setpoint-0` if setpoint 0 was written while the hold waited.
+: payload.gas (object) : for Select gas: `{number, symbol, name}`, confirmed by reading the gas register.
+: alicat.op (string) : `command`.
+: alicat.outcome (string) : the same as `payload.outcome`.
+: alicat.result (object) : the full result: command `id` and `arg`, `interface` (`extended` or `limited`), device `status` and `statusName`, `returnValue`, `durationMs`, and for valve commands `effect` and `fallback`.
+
+### Details
+
+Commands run one at a time per device. Each sends a NOP first, because Alicat ignores a repeated command. It then waits one device cycle, writes the command, and polls until the device reports it finished.
+
+**Valve commands are urgent**: they go ahead of everything else, and they interrupt the polling of a command that's still waiting. If the device is still running another command (for example a timed tare), it queues the valve command until that one finishes. The output reports this as `queuedBehind`. With *Fallback*, setpoint 0 is written immediately as well.
+
+Commands that are safe to repeat (gas, valve, display) are sent once more if the device doesn't pick them up. **Tare and totalizer reset are never repeated automatically.** If one of them can't be confirmed, its outcome is `unknown`.
+
+Tare flow only when nothing is flowing.
+
+Errors go to Catch nodes, with `msg.alicat.error = {code, message, outcome, statusName}`.
+</script>

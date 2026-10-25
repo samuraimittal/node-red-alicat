@@ -1,0 +1,35 @@
+<script type="text/markdown" data-help-name="alicat-device">
+One Alicat mass flow or pressure controller on Modbus TCP.
+
+### Details
+
+Every node that uses this configuration shares **one** supervised TCP connection to the instrument, even across redeploys. Two configurations with the same host and port share that connection too, and the most recently deployed settings apply. A configuration that reaches the same instrument by another host name or IP alias, or with a different unit ID, is refused (`EDUPLICATE`) and never opens a second socket.
+
+- **Host / Port / Unit ID**: the instrument's IP address, normally port 502. Native-Ethernet Alicats ignore the unit ID, so keep it at 1. Unit ID 255 is not answered by older firmware.
+- **Test connection** identifies the instrument with the settings in this dialog, before you deploy, and shows the firmware, what the setpoint controls and live readings. If a deployed node already uses the instrument, the test reads through that connection instead, so it shows what was identified with the deployed settings. Otherwise it opens its own connection and closes it straight after. Only port 502 can be tested, unless `alicatModbus.probePorts` in settings.js allows more (for example a simulator's port).
+
+**Firmware before 10v07 (Gen-1)** doesn't report its units or the meaning of its data-frame slots over Modbus:
+
+- **Data frame**: pick the preset that matches the device's data frame, or list the slots. `extended-7` matches 7-slot frames: absolute pressure, gauge pressure, barometric pressure, temperature, volumetric flow, mass flow, setpoint.
+- **Controls**: what the setpoint currently controls. Gen-1 can't report this. Once the library switches the mode itself, it keeps track of it.
+- **Units**: labels for the readings, e.g. `massFlow=SCCM, setpoint=SCCM`.
+
+Firmware 10v07 and newer is identified fully automatically: units, ranges and control mode.
+
+**Advanced**
+
+- **Register map**: detect the firmware generation, or force one.
+- **Timeout**: how long to wait for each reply. A single timeout fails only that request. The connection is dropped and reopened only after 3 timeouts with no data at all.
+- **Connect**: how long to wait for the TCP connection.
+- **Request gap**: the minimum time between requests (default 20 ms ≈ 50 Hz, the device's rate).
+- **Heartbeat**: how often an idle link is read. Alicat drops connections idle for about 20 s, so this stays at 15 s or less; 0 turns it off.
+- **Max retry**: reconnect attempts back off exponentially up to this delay.
+- **Queue depth**: how many requests may wait. Beyond that the oldest poll is dropped, or a new request is refused with `EQUEUEFULL`; valve commands and the steps of a running command are never refused.
+- **Frame trace**: logs raw frames for troubleshooting (verbose).
+
+A setting outside its range shows the node as *invalid config*, and the nodes using it fail every message with `EINVALIDARG`.
+
+### References
+
+- [Alicat Modbus manual](https://documents.alicat.com/manuals/DOC-MANUAL-MODBUS.pdf)
+</script>

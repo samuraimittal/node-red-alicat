@@ -1,0 +1,19 @@
+{
+    "alicat-status": {
+        "paletteLabel": "status",
+        "label": {
+            "default": "alicat status",
+            "periodic": "Stats every"
+        },
+        "unit": {
+            "seconds": "s"
+        },
+        "tip": {
+            "periodic": "(0 = only on changes)"
+        },
+        "port": {
+            "input": "reconnect, identify or stats",
+            "output": "state, identity and stats"
+        }
+    }
+}

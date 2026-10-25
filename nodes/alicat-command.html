@@ -1,0 +1,63 @@
+<script src="resources/@samuraimittal/node-red-alicat/alicat-editor.js"></script>
+<script src="resources/@samuraimittal/node-red-alicat/alicat-command.js"></script>
+
+<script type="text/html" data-template-name="alicat-command">
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-plug"></i> <span data-i18n="@samuraimittal/node-red-alicat/alicat-device:alicat.label.device"></span></label>
+        <input type="text" id="node-input-device">
+    </div>
+    <div class="form-row">
+        <label for="node-input-command"><i class="fa fa-bolt"></i> <span data-i18n="alicat-command.label.command"></span></label>
+        <select id="node-input-command">
+            <optgroup data-i18n="[label]alicat-command.group.tare">
+                <option value="tareFlow" data-i18n="alicat-command.command.tareFlow"></option>
+                <option value="tareAbsolutePressure" data-i18n="alicat-command.command.tareAbsolutePressure"></option>
+                <option value="tareGaugePressure" data-i18n="alicat-command.command.tareGaugePressure"></option>
+            </optgroup>
+            <optgroup data-i18n="[label]alicat-command.group.totalizer">
+                <option value="resetTotalizer1" data-i18n="alicat-command.command.resetTotalizer1"></option>
+                <option value="resetTotalizer2" data-i18n="alicat-command.command.resetTotalizer2"></option>
+            </optgroup>
+            <optgroup data-i18n="[label]alicat-command.group.valve">
+                <option value="holdClosed" data-i18n="alicat-command.command.holdClosed"></option>
+                <option value="holdCurrent" data-i18n="alicat-command.command.holdCurrent"></option>
+                <option value="exhaust" data-i18n="alicat-command.command.exhaust"></option>
+                <option value="resume" data-i18n="alicat-command.command.resume"></option>
+            </optgroup>
+            <optgroup data-i18n="[label]alicat-command.group.other">
+                <option value="selectGas" data-i18n="alicat-command.command.selectGas"></option>
+                <option value="lockDisplay" data-i18n="alicat-command.command.lockDisplay"></option>
+                <option value="unlockDisplay" data-i18n="alicat-command.command.unlockDisplay"></option>
+                <option value="msg" data-i18n="alicat-command.command.msg"></option>
+                <option value="raw" data-i18n="alicat-command.command.raw"></option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="form-row" id="alicat-arg-row">
+        <label for="node-input-arg" data-i18n="alicat-command.label.gas"></label>
+        <input type="text" id="node-input-arg" style="width:70%">
+        <input type="hidden" id="node-input-argType">
+    </div>
+    <div class="form-row" id="alicat-fallback-row">
+        <label for="node-input-fallbackSetpointZero" data-i18n="alicat-command.label.fallback"></label>
+        <input type="checkbox" id="node-input-fallbackSetpointZero" style="width:auto">
+        <label for="node-input-fallbackSetpointZero" style="width:auto" data-i18n="alicat-command.tip.fallback"></label>
+    </div>
+    <div class="form-row" id="alicat-raw-allow">
+        <label for="node-input-allowRaw" data-i18n="alicat-command.label.raw"></label>
+        <input type="checkbox" id="node-input-allowRaw" style="width:auto">
+        <label for="node-input-allowRaw" style="width:auto" data-i18n="alicat-command.tip.raw"></label>
+    </div>
+    <div id="alicat-raw-rows">
+        <div class="form-row">
+            <label for="node-input-rawId" data-i18n="alicat-command.label.rawId"></label>
+            <input type="text" id="node-input-rawId" style="width:100px">
+            <label for="node-input-rawArg" style="width:auto; margin-left:20px" data-i18n="alicat-command.label.rawArg"></label>
+            <input type="text" id="node-input-rawArg" style="width:100px">
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>

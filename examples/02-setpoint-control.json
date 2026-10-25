@@ -1,0 +1,70 @@
+[
+    {
+        "id": "ex2-comment", "type": "comment", "name": "Setpoints in any mode: current, mass flow, gauge pressure, valve drive",
+        "info": "Switching mode is bumpless: the node holds the valve, switches, writes the setpoint and resumes.\n\nOut-of-range values are rejected before anything is sent; the catch node shows the error and `msg.alicat.error`.\n\nEach button leaves the instrument in the mode it selects. On a real instrument, finish with the mode your process uses.",
+        "x": 290, "y": 40, "wires": []
+    },
+    {
+        "id": "ex2-dev", "type": "alicat-device", "name": "Simulated MFC", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex2-in-current", "type": "inject", "name": "12.5 (current mode)", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "12.5", "payloadType": "num", "x": 140, "y": 100,
+        "wires": [["ex2-sp-current"]]
+    },
+    {
+        "id": "ex2-sp-current", "type": "alicat-setpoint", "name": "", "device": "ex2-dev", "value": "payload", "valueType": "msg",
+        "variable": "current", "switchMode": "bumpless", "outOfRange": "reject", "verify": true, "savePowerUp": false,
+        "x": 350, "y": 100, "wires": [["ex2-debug"]]
+    },
+    {
+        "id": "ex2-in-mass", "type": "inject", "name": "10 in mass-flow mode", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "10", "payloadType": "num", "x": 140, "y": 160,
+        "wires": [["ex2-sp-mass"]]
+    },
+    {
+        "id": "ex2-sp-mass", "type": "alicat-setpoint", "name": "", "device": "ex2-dev", "value": "payload", "valueType": "msg",
+        "variable": "massFlow", "switchMode": "bumpless", "outOfRange": "reject", "verify": true, "savePowerUp": false,
+        "x": 360, "y": 160, "wires": [["ex2-debug"]]
+    },
+    {
+        "id": "ex2-in-pressure", "type": "inject", "name": "20 in gauge-pressure mode", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "20", "payloadType": "num", "x": 150, "y": 220,
+        "wires": [["ex2-sp-pressure"]]
+    },
+    {
+        "id": "ex2-sp-pressure", "type": "alicat-setpoint", "name": "", "device": "ex2-dev", "value": "payload", "valueType": "msg",
+        "variable": "gaugePressure", "switchMode": "bumpless", "outOfRange": "reject", "verify": true, "savePowerUp": false,
+        "x": 380, "y": 220, "wires": [["ex2-debug"]]
+    },
+    {
+        "id": "ex2-in-valve", "type": "inject", "name": "30 % valve drive", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "30", "payloadType": "num", "x": 130, "y": 280,
+        "wires": [["ex2-sp-valve"]]
+    },
+    {
+        "id": "ex2-sp-valve", "type": "alicat-setpoint", "name": "", "device": "ex2-dev", "value": "payload", "valueType": "msg",
+        "variable": "valveDrive", "switchMode": "bumpless", "outOfRange": "reject", "verify": true, "savePowerUp": false,
+        "x": 360, "y": 280, "wires": [["ex2-debug"]]
+    },
+    {
+        "id": "ex2-in-bad", "type": "inject", "name": "9999 (out of range → error)", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "9999", "payloadType": "num", "x": 160, "y": 340,
+        "wires": [["ex2-sp-current"]]
+    },
+    {
+        "id": "ex2-debug", "type": "debug", "name": "applied setpoint (msg.alicat: actual, units, mode)", "active": true,
+        "tosidebar": true, "console": false, "tostatus": false, "complete": "true", "targetType": "full", "x": 680, "y": 190, "wires": []
+    },
+    {
+        "id": "ex2-catch", "type": "catch", "name": "setpoint errors", "scope": ["ex2-sp-current", "ex2-sp-mass", "ex2-sp-pressure", "ex2-sp-valve"],
+        "uncaught": false, "x": 140, "y": 400, "wires": [["ex2-debug-err"]]
+    },
+    {
+        "id": "ex2-debug-err", "type": "debug", "name": "msg.alicat.error", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "alicat.error", "targetType": "msg", "x": 370, "y": 400, "wires": []
+    }
+]

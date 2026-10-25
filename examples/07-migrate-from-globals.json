@@ -1,0 +1,81 @@
+[
+    {
+        "id": "ex7-comment", "type": "comment", "name": "Migrating from a global-variable driver (no big-bang change)",
+        "info": "1. The read node publishes one frozen snapshot to `global.alicat.station1`, with `quality` and `ts`.\n2. A small function keeps the old global keys alive for existing readers, writing them only while the data is good.\n3. Commands use request/response (link call), not a global mailbox: the caller gets the applied setpoint or an error.\n4. Desired-state control lives in the maintain node, not in a global.\n5. Analytics (smoothing, slope) are fed by messages, and are reset at each test start.\n\nThen move readers to `global.alicat.station1` one by one, and delete the legacy mapping last.\n\nFor a Gen-1 instrument (firmware before 10v07) with the production 7-slot data frame, set the device's Data frame to extended-7.",
+        "x": 260, "y": 40, "wires": []
+    },
+    {
+        "id": "ex7-dev", "type": "alicat-device", "name": "Station 1", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown",
+        "unitLabels": "", "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000",
+        "backoffMax": "30000", "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex7-read", "type": "alicat-read", "name": "station 1 → global.alicat.station1", "device": "ex7-dev",
+        "trigger": "interval", "interval": "100", "dataset": "live", "output": "object", "reading": "massFlow", "emit": "always",
+        "topic": "station1", "contextScope": "global", "contextKey": "alicat.station1", "contextStore": "", "x": 190, "y": 100,
+        "wires": [["ex7-legacy", "ex7-analytics"]]
+    },
+    {
+        "id": "ex7-legacy", "type": "function", "name": "legacy globals (temporary)",
+        "func": "// Keeps old readers of Alicat.Read.* working during migration.\n// Writes only good data, so readers never act on frozen values.\nif (msg.alicat.quality !== 'good') {\n    global.set('Alicat.Read.quality', msg.alicat.quality);\n    return null;\n}\nconst v = msg.payload;\nglobal.set('Alicat.Read', {\n    PSIG: v.gaugePressure,\n    massFlow_Raw: -v.massFlow, // the old flow inverted the sign (scale -1); keep or drop deliberately\n    setpoint: v.setpoint,\n    ts: msg.alicat.ts,\n    quality: 'good'\n});\nglobal.set('Alicat.StatusBuffer', {\n    HLD: msg.alicat.status.flags.holding,\n    EXH: msg.alicat.status.flags.exhausting\n});\nreturn null;",
+        "outputs": 0, "timeout": 0, "noerr": 0, "initialize": "", "finalize": "", "libs": [], "x": 500, "y": 80, "wires": []
+    },
+    {
+        "id": "ex7-analytics", "type": "function", "name": "time-based average + slope (reset on topic 'reset')",
+        "func": "// Window and slope are based on msg.alicat.ts (reply time), not on sample counts.\nconst WINDOW_MS = 1000;\nif (msg.topic === 'reset') { context.set('buf', []); return null; }\nif (msg.alicat.quality !== 'good') return null;\nconst buf = (context.get('buf') || []).filter(p => msg.alicat.ts - p.t <= WINDOW_MS);\nbuf.push({ t: msg.alicat.ts, v: msg.payload.massFlow });\ncontext.set('buf', buf);\nconst mean = buf.reduce((s, p) => s + p.v, 0) / buf.length;\nconst first = buf[0];\nconst dt = (msg.alicat.ts - first.t) / 1000;\nconst slope = dt > 0 ? (msg.payload.massFlow - first.v) / dt : 0;\nreturn { topic: 'massFlow', payload: { mean, slope, samples: buf.length, units: msg.alicat.units.massFlow } };",
+        "outputs": 1, "timeout": 0, "noerr": 0, "initialize": "", "finalize": "", "libs": [], "x": 560, "y": 140,
+        "wires": [["ex7-debug-analytics"]]
+    },
+    {
+        "id": "ex7-in-reset", "type": "inject", "name": "test start → reset analytics", "props": [{ "p": "topic", "vt": "str" }],
+        "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "reset", "x": 200, "y": 180, "wires": [["ex7-analytics"]]
+    },
+    {
+        "id": "ex7-debug-analytics", "type": "debug", "name": "mean / slope (on the node status)", "active": true, "tosidebar": false,
+        "console": false, "tostatus": true, "complete": "payload", "targetType": "msg", "statusVal": "payload.mean", "statusType": "msg",
+        "x": 870, "y": 140, "wires": []
+    },
+    {
+        "id": "ex7-in-seq", "type": "inject", "name": "sequencer: setpoint 40", "props": [{ "p": "payload" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "40", "payloadType": "num", "x": 170, "y": 260,
+        "wires": [["ex7-call"]]
+    },
+    {
+        "id": "ex7-call", "type": "link call", "name": "apply setpoint", "links": ["ex7-link-in"], "linkType": "static",
+        "timeout": "10", "x": 380, "y": 260, "wires": [["ex7-debug-ack"]]
+    },
+    {
+        "id": "ex7-debug-ack", "type": "debug", "name": "acknowledged: applied setpoint", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 620, "y": 260, "wires": []
+    },
+    {
+        "id": "ex7-link-in", "type": "link in", "name": "setpoint service", "links": [], "x": 135, "y": 320, "wires": [["ex7-sp"]]
+    },
+    {
+        "id": "ex7-sp", "type": "alicat-setpoint", "name": "", "device": "ex7-dev", "value": "payload", "valueType": "msg",
+        "variable": "current", "switchMode": "bumpless", "outOfRange": "reject", "verify": true, "savePowerUp": false,
+        "x": 300, "y": 320, "wires": [["ex7-link-return"]]
+    },
+    {
+        "id": "ex7-link-return", "type": "link out", "name": "return", "mode": "return", "links": [], "x": 465, "y": 320, "wires": []
+    },
+    {
+        "id": "ex7-in-maintain", "type": "inject", "name": "maintain {setpoint 25, valve auto}", "props": [{ "p": "payload" }],
+        "repeat": "", "crontab": "", "once": false, "onceDelay": 0.1, "topic": "", "payload": "{\"setpoint\":25,\"valve\":\"auto\"}",
+        "payloadType": "json", "x": 200, "y": 400, "wires": [["ex7-maintain"]]
+    },
+    {
+        "id": "ex7-in-release", "type": "inject", "name": "release", "props": [{ "p": "topic", "vt": "str" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "release", "x": 130, "y": 440, "wires": [["ex7-maintain"]]
+    },
+    {
+        "id": "ex7-maintain", "type": "alicat-control", "name": "", "device": "ex7-dev", "interval": "500", "tolerance": "",
+        "correctionMs": "1000", "maxAttempts": "5", "onExternalChange": "revert", "switchMode": "bumpless", "x": 440, "y": 420,
+        "wires": [["ex7-debug-control"]]
+    },
+    {
+        "id": "ex7-debug-control", "type": "debug", "name": "converged / drift / failed", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "true", "targetType": "full", "x": 660, "y": 420, "wires": []
+    }
+]

@@ -1,0 +1,30 @@
+<script type="text/markdown" data-help-name="alicat-setpoint">
+Writes a setpoint, optionally switching what it controls first: mass flow, volumetric flow, pressure or valve drive.
+
+### Inputs
+
+: payload (number | string) : the setpoint, in the units of the controlled variable (for example SCCM, PSIG, or % for valve drive). Configurable: any msg, flow, global, env or fixed value.
+: *variable* (string) : with **Controls = From msg.variable**: `massFlow`, `volumetricFlow`, `absolutePressure`, `gaugePressure`, `differentialPressure`, `valveDrive` or `current`.
+
+### Outputs
+
+: payload (number) : the setpoint the device reports after the write (the value written, if it can't be read back).
+: alicat.op (string) : `setpoint`.
+: alicat.outcome (string) : `executed` (confirmed by read-back), `accepted` (written, not verifiable), `unknown` (the read-back shows a different value: the device limited it, or another master changed it), or `not-sent`.
+: alicat.controlledVariable (string) : what the setpoint controls now.
+: alicat.units (object) : the setpoint's units, as `{setpoint: "SCCM"}`.
+: alicat.result (object) : the details: `requested` (the value asked for), `written` (after *Clamp*), `actual` (read back, or `null`), `clamped`, `verified` (the read-back matches), `superseded` (a newer setpoint replaced this one before it was sent).
+: alicat.device, host, port, unitId, generation, firmware, serial : which instrument.
+
+### Details
+
+**Switching mode** is bumpless by default. The node holds the valve at its current position, switches the loop control variable, writes the new setpoint, then resumes. The old setpoint number is therefore never read in the new variable's units (for example "100 %" becoming "100 SCCM"). A valve that was already held stays held, and so does one an operator holds or exhausts during the switch. On firmware 10v07 and newer, the device confirms the new mode, and the units and range are re-read. Older firmware can't report its mode, so the switch is reported as accepted.
+
+Out-of-range values are **rejected** before anything is sent, unless *Clamp* is chosen. A newer setpoint replaces one that is still waiting to be sent: only the latest is written.
+
+Errors (no connection, out of range, mode refused) go to Catch nodes. `msg.alicat.error` holds `{code, message, outcome}`.
+
+### References
+
+- Valve drive mode needs firmware 8v24 or newer.
+</script>

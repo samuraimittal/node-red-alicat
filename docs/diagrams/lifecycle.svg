@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2658" height="966" viewBox="-24 4316 2658 966">
+<title>4 · Connections: deploy, connect, identify, redeploy</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="-24" y="4316" width="2658" height="966" fill="#ffffff"/>
+<text class="body" x="0" y="4372" font-size="24" fill="#1e1e1e">4 · Connections: deploy, connect, identify, redeploy</text>
+<rect x="0" y="4388" width="2610" height="870" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="40" y="4442.8">Exactly one socket per instrument, whatever the number of nodes, and no reconnect on a redeploy.</tspan></text>
+<rect x="40" y="4478" width="330" height="153" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="52" y="4502.9">1 · nodes/alicat-device.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="52" y="4524.0">acquire</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="4545.9">Config node. Nothing opens until a node uses it;</tspan><tspan x="52" y="4563.4">the first use takes a lease, so an unused config</tspan><tspan x="52" y="4580.9">never holds a connection slot.</tspan></text>
+<rect x="480" y="4478" width="330" height="153" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="4502.9">2 · lib/ConnectionRegistry.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="4524.0">acquire · _entryFor · _claim</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="4545.9">One entry {client, device} per host:port, a lease</tspan><tspan x="492" y="4563.4">per node instance. Another config for the same</tspan><tspan x="492" y="4580.9">IP and port: EDUPLICATE, no socket.</tspan></text>
+<rect x="920" y="4478" width="330" height="153" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="932" y="4504.8">3 · IDLE → CONNECTING</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="4526.9">lib/AlicatClient.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="4548.0">start · _connect</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="4569.9">Resolves the host, opens a</tspan><tspan x="932" y="4587.4">ModbusTcpTransport. Requests wait within their</tspan><tspan x="932" y="4604.9">deadline meanwhile.</tspan></text>
+<rect x="1360" y="4478" width="330" height="153" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="1372" y="4504.8">ONLINE</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1372" y="4526.9">lib/AlicatClient.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1372" y="4548.0">_onConnected · _armHeartbeat</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1372" y="4569.9">Heartbeat: reads register 1200 after 5 s idle</tspan><tspan x="1372" y="4587.4">(instruments drop idle connections after about 20</tspan><tspan x="1372" y="4604.9">s).</tspan></text>
+<rect x="1140" y="4691" width="330" height="161" rx="10" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="1152" y="4717.8">BACKOFF</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1152" y="4739.9">lib/AlicatClient.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1152" y="4761.0">_goBackoff · _scheduleRetry</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1152" y="4782.9">Down, or link suspect (3 timeouts in a row and no</tspan><tspan x="1152" y="4800.4">bytes for 2× the timeout). Writes fail fast</tspan><tspan x="1152" y="4817.9">(ENOTCONNECTED); retry after 1 s doubling to</tspan><tspan x="1152" y="4835.4">30 s.</tspan></text>
+<rect x="1800" y="4478" width="330" height="153" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1812" y="4502.9">lib/AlicatDevice.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1812" y="4524.0">_onClientState · identify</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1812" y="4545.9">Client ONLINE: identify, on every connect.</tspan><tspan x="1812" y="4563.4">BACKOFF or CLOSED: subscribers get one</tspan><tspan x="1812" y="4580.9">offline snapshot.</tspan></text>
+<rect x="2240" y="4478" width="330" height="153" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2252" y="4502.9">lib/device/identify.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2252" y="4524.0">identifyDevice · identifyGen2 ·</tspan><tspan x="2252" y="4540.3">identifyGen1</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2252" y="4561.9">Gen-2: firmware registers 1090–1093 plausible</tspan><tspan x="2252" y="4579.4">and ≥ 10v07, then the info blocks. Gen-1:</tspan><tspan x="2252" y="4596.9">exception 02 at 1090, then count the float slots.</tspan><tspan x="2252" y="4614.4">Never falls through.</tspan></text>
+<rect x="1800" y="4691" width="330" height="161" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1812" y="4715.9">lib/node-red/status.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1812" y="4737.0">StatusReporter · linkStatus</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1812" y="4758.9">Every node's status dot, from the client and</tspan><tspan x="1812" y="4776.4">device state and the identity. Under 20</tspan><tspan x="1812" y="4793.9">characters; text-only changes at most 2 per</tspan><tspan x="1812" y="4811.4">second.</tspan></text>
+<rect x="2240" y="4691" width="330" height="161" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2252" y="4715.9">nodes/alicat-status.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2252" y="4737.0">onClient · onDevice · onIdentity</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2252" y="4758.9">A message on each state or identity change, plus</tspan><tspan x="2252" y="4776.4">periodic stats.</tspan></text>
+<rect x="40" y="4912" width="330" height="102" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="4938.8">Deploy starts (RED.events)</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="4960.9">flows:stopping: the old nodes close; a released</tspan><tspan x="52" y="4978.4">lease parks its entry with the socket still open.</tspan></text>
+<rect x="480" y="4912" width="330" height="102" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="4936.9">lib/ConnectionRegistry.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="4958.0">_release · _takeOver</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="4979.9">A new node for the same host:port takes over the</tspan><tspan x="492" y="4997.4">parked entry: no reconnect, no re-identification.</tspan></text>
+<rect x="920" y="4912" width="330" height="102" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="932" y="4938.8">Deploy done</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="4960.9">flows:started: entries nobody took over are</tspan><tspan x="932" y="4978.4">closed. A fallback timer covers a missing event.</tspan></text>
+<rect x="40" y="5074" width="330" height="144" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="5100.8">Stop flows or shutdown</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="5122.9">runtime-state stop without a deploy: close at</tspan><tspan x="52" y="5140.4">once, freeing the instrument's connection slot.</tspan></text>
+<rect x="480" y="5074" width="330" height="144" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="492" y="5100.8">CLOSING → CLOSED</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="492" y="5122.9">lib/AlicatClient.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="492" y="5144.0">stop</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="492" y="5165.9">Queued work is rejected and the socket closed.</tspan><tspan x="492" y="5183.4">An acquire meanwhile waits, so sockets never</tspan><tspan x="492" y="5200.9">overlap.</tspan></text>
+<rect x="920" y="5074" width="330" height="144" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="932" y="5100.8">A node closing</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="932" y="5122.9">lib/node-red/device-node.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="932" y="5144.0">onClose · cancelOwner</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="932" y="5165.9">Its own cleanups (newest first), then</tspan><tspan x="932" y="5183.4">status.close(), device.cancelOwner(owner), the</tspan><tspan x="932" y="5200.9">lease release, done().</tspan></text>
+<polyline points="376,4555 474,4555" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="406" y="4545" width="38" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="425" y="4559.0">lease</tspan></text>
+<polyline points="816,4555 914,4555" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="834" y="4545" width="63" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="865.5" y="4559.0">new entry</tspan></text>
+<polyline points="1256,4555 1354,4555" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="1272" y="4545" width="66" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1305" y="4559.0">connected</tspan></text>
+<polyline points="1525,4637 1344,4685" fill="none" stroke="#e03131" stroke-width="2" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-failure)"/>
+<rect x="1416" y="4651" width="38" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1435" y="4665.0">down</tspan></text>
+<polyline points="1267,4685 1085,4637" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="1160" y="4651" width="32" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1176" y="4665.0">retry</tspan></text>
+<polyline points="1696,4555 1794,4555" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="1728" y="4545" width="35" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1745.5" y="4559.0">state</tspan></text>
+<polyline points="2136,4555 2234,4555" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2157" y="4545" width="56" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2185" y="4559.0">identify()</tspan></text>
+<polyline points="1965,4637 1965,4685" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="1922" y="4651" width="87" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="1965.5" y="4665.0">state · identity</tspan></text>
+<polyline points="2405,4637 2405,4685" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="2381" y="4651" width="48" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2405" y="4665.0">identity</tspan></text>
+<polyline points="376,4963 474,4963" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="379" y="4953" width="92" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="425" y="4967.0">same host:port</tspan></text>
+<polyline points="816,4963 914,4963" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="376,5146 474,5146" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+</svg>

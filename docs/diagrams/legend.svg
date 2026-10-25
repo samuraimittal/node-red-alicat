@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1128" height="1463" viewBox="-24 -72 1128 1463">
+<title>How to read this diagram</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="-24" y="-72" width="1128" height="1463" fill="#ffffff"/>
+<text class="body" x="0" y="-16" font-size="24" fill="#1e1e1e">How to read this diagram</text>
+<rect x="0" y="0" width="1080" height="1367" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<rect x="40" y="40" width="260" height="66" rx="10" fill="#e5dbff" stroke="#6741d9" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="66.8">Editor (browser)</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="89.0">resources/: dialogs, validators</tspan></text>
+<rect x="410" y="40" width="260" height="66" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="422" y="66.8">Node-RED nodes</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="422" y="89.0">nodes/*.js</tspan></text>
+<rect x="780" y="40" width="260" height="66" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="66.8">Node scaffolding</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="792" y="89.0">lib/node-red/</tspan></text>
+<rect x="40" y="166" width="260" height="66" rx="10" fill="#c3fae8" stroke="#099268" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="192.8">Node helpers</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="214.9">Reconciler, ContextPublisher</tspan></text>
+<rect x="410" y="166" width="260" height="66" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="422" y="192.8">Device, lane, registry</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="422" y="214.9">an instrument, its commands</tspan></text>
+<rect x="780" y="166" width="260" height="66" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="192.8">Connection</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="792" y="214.9">AlicatClient, queue, backoff</tspan></text>
+<rect x="40" y="292" width="260" height="66" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="318.8">Modbus TCP</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="340.9">lib/modbus/</tspan></text>
+<rect x="410" y="292" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="422" y="318.8">Protocol tables, shared</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="422" y="340.9">lib/alicat/, errors, util</tspan></text>
+<rect x="780" y="292" width="260" height="66" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="318.8">Simulator, tools</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="792" y="340.9">tools/</tspan></text>
+<rect x="40" y="418" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="444.8">Outside this package</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="466.9">Node-RED, the instrument</tspan></text>
+<rect x="40" y="544" width="260" height="153" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="570.8">File boxes</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="593.0">Path, then what the file does.</tspan><tspan x="52" y="610.5">+ the non-JS files it stands for.</tspan><tspan x="52" y="628.0">uses: shared modules it requires (no</tspan><tspan x="52" y="645.5">arrow).</tspan><tspan x="52" y="663.0">used by: who requires it, when that</tspan><tspan x="52" y="680.5">has no arrow.</tspan></text>
+<rect x="410" y="544" width="260" height="153" rx="10" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="422" y="570.8">Generated</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="422" y="593.0">npm run diagram builds this from</tspan><tspan x="422" y="610.5">tools/diagram/spec.js and the code's</tspan><tspan x="422" y="628.0">require() calls. Edit the spec, not this</tspan><tspan x="422" y="645.5">file. A unit test fails when the diagram</tspan><tspan x="422" y="663.0">falls behind the code.</tspan></text>
+<rect x="40" y="757" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="783.8">a.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="806.0">requires b.js</tspan></text>
+<rect x="780" y="757" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="783.8">b.js</tspan></text>
+<rect x="40" y="883" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="909.8">emitter</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="932.0">emits events</tspan></text>
+<rect x="780" y="883" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="909.8">listener</tspan></text>
+<rect x="40" y="1009" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="1035.8">step</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="1058.0">in a storyboard</tspan></text>
+<rect x="780" y="1009" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="1035.8">next step</tspan></text>
+<rect x="40" y="1135" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="1161.8">step</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="1184.0">when it fails</tspan></text>
+<rect x="780" y="1135" width="260" height="66" rx="10" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="1161.8">failure</tspan></text>
+<rect x="40" y="1261" width="260" height="66" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="52" y="1287.8">test suite</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="52" y="1310.0">runs against</tspan></text>
+<rect x="780" y="1261" width="260" height="66" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="792" y="1287.8">simulator</tspan></text>
+<polyline points="306,790 774,790" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<rect x="512" y="780" width="56" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="540" y="794.0">require()</tspan></text>
+<polyline points="306,916 774,916" fill="none" stroke="#9c36b5" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-event)"/>
+<rect x="500" y="906" width="81" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="540.5" y="920.0">event names</tspan></text>
+<polyline points="306,1042 774,1042" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="493" y="1032" width="94" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="540" y="1046.0">request or data</tspan></text>
+<polyline points="306,1168 774,1168" fill="none" stroke="#e03131" stroke-width="2" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-failure)"/>
+<rect x="505" y="1158" width="71" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="540.5" y="1172.0">failure path</tspan></text>
+<polyline points="306,1294 774,1294" fill="none" stroke="#c2255c" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="2 5" marker-end="url(#head-drives)"/>
+<rect x="520" y="1284" width="41" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="540.5" y="1298.0">drives</tspan></text>
+</svg>

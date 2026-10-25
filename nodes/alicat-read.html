@@ -1,0 +1,80 @@
+<script src="resources/@samuraimittal/node-red-alicat/alicat-editor.js"></script>
+<script src="resources/@samuraimittal/node-red-alicat/alicat-read.js"></script>
+
+<script type="text/html" data-template-name="alicat-read">
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-plug"></i> <span data-i18n="@samuraimittal/node-red-alicat/alicat-device:alicat.label.device"></span></label>
+        <input type="text" id="node-input-device">
+    </div>
+    <div class="form-row">
+        <label for="node-input-dataset"><i class="fa fa-database"></i> <span data-i18n="alicat-read.label.dataset"></span></label>
+        <select id="node-input-dataset">
+            <option value="live" data-i18n="alicat-read.dataset.live"></option>
+            <option value="identity" data-i18n="alicat-read.dataset.identity"></option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-trigger"><i class="fa fa-clock-o"></i> <span data-i18n="alicat-read.label.trigger"></span></label>
+        <select id="node-input-trigger">
+            <option value="interval" data-i18n="alicat-read.trigger.interval"></option>
+            <option value="input" data-i18n="alicat-read.trigger.input"></option>
+        </select>
+    </div>
+    <div class="form-row" id="alicat-interval-row">
+        <label for="node-input-interval" data-i18n="alicat-read.label.interval"></label>
+        <input type="text" id="node-input-interval" style="width:100px"> <span style="opacity:.7" data-i18n="alicat-read.tip.interval"></span>
+    </div>
+    <div class="form-row" id="alicat-emit-row">
+        <label for="node-input-emit" data-i18n="alicat-read.label.emit"></label>
+        <select id="node-input-emit">
+            <option value="always" data-i18n="alicat-read.emit.always"></option>
+            <option value="change" data-i18n="alicat-read.emit.change"></option>
+        </select>
+    </div>
+    <div class="form-row" id="alicat-output-row">
+        <label for="node-input-output"><i class="fa fa-sign-out"></i> <span data-i18n="alicat-read.label.output"></span></label>
+        <select id="node-input-output">
+            <option value="object" data-i18n="alicat-read.output.object"></option>
+            <option value="value" data-i18n="alicat-read.output.value"></option>
+        </select>
+    </div>
+    <div class="form-row" id="alicat-reading-row">
+        <label for="node-input-reading" data-i18n="alicat-read.label.reading"></label>
+        <select id="node-input-reading">
+            <option value="massFlow" data-i18n="alicat-read.reading.massFlow"></option>
+            <option value="volumetricFlow" data-i18n="alicat-read.reading.volumetricFlow"></option>
+            <option value="absolutePressure" data-i18n="alicat-read.reading.absolutePressure"></option>
+            <option value="gaugePressure" data-i18n="alicat-read.reading.gaugePressure"></option>
+            <option value="differentialPressure" data-i18n="alicat-read.reading.differentialPressure"></option>
+            <option value="barometricPressure" data-i18n="alicat-read.reading.barometricPressure"></option>
+            <option value="pressure" data-i18n="alicat-read.reading.pressure"></option>
+            <option value="temperature" data-i18n="alicat-read.reading.temperature"></option>
+            <option value="setpoint" data-i18n="alicat-read.reading.setpoint"></option>
+            <option value="valveDrive" data-i18n="alicat-read.reading.valveDrive"></option>
+            <option value="totalMass" data-i18n="alicat-read.reading.totalMass"></option>
+            <option value="relativeHumidity" data-i18n="alicat-read.reading.relativeHumidity"></option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-tasks"></i> <span data-i18n="node-red:common.label.topic"></span></label>
+        <input type="text" id="node-input-topic" data-i18n="[placeholder]alicat-read.placeholder.topic">
+    </div>
+    <div id="alicat-context">
+        <div class="form-row">
+            <label for="node-input-contextKey"><i class="fa fa-globe"></i> <span data-i18n="alicat-read.label.contextKey"></span></label>
+            <select id="node-input-contextScope" style="width:90px">
+                <option value="global" data-i18n="alicat-read.scope.global"></option>
+                <option value="flow" data-i18n="alicat-read.scope.flow"></option>
+            </select>
+            <input type="text" id="node-input-contextKey" style="width:calc(70% - 100px)" data-i18n="[placeholder]alicat-read.placeholder.contextKey">
+        </div>
+        <div class="form-row">
+            <label for="node-input-contextStore" data-i18n="alicat-read.label.contextStore"></label>
+            <select id="node-input-contextStore"></select>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>

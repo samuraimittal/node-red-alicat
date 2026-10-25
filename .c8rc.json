@@ -1,0 +1,11 @@
+{
+    "all": true,
+    "include": ["lib/**/*.js", "tools/sim/**/*.js", "tools/alicat-probe.js", "tools/cli.js", "nodes/**/*.js"],
+    "exclude": ["lib/node-red/types.js", "lib/device/types.js"],
+    "reporter": ["text", "html"],
+    "report-dir": "coverage",
+    "lines": 97,
+    "branches": 88,
+    "functions": 94,
+    "statements": 97
+}

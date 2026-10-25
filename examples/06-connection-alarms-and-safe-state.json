@@ -1,0 +1,74 @@
+[
+    {
+        "id": "ex6-comment", "type": "comment", "name": "Connection alarms, and an end-of-test safe-state sequence",
+        "info": "Node-RED is not a safety controller: the library leaves the device as it is on deploy, stop and shutdown. Put the device in a safe state explicitly, as below, and confirm it from the status bits.",
+        "x": 230, "y": 40, "wires": []
+    },
+    {
+        "id": "ex6-dev", "type": "alicat-device", "name": "Simulated MFC", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex6-status", "type": "alicat-status", "name": "", "device": "ex6-dev", "periodic": "0", "x": 140, "y": 100,
+        "wires": [["ex6-switch"]]
+    },
+    {
+        "id": "ex6-in-reconnect", "type": "inject", "name": "force reconnect", "props": [{ "p": "topic", "vt": "str" }], "repeat": "",
+        "crontab": "", "once": false, "onceDelay": 0.1, "topic": "reconnect", "x": 140, "y": 160, "wires": [["ex6-status"]]
+    },
+    {
+        "id": "ex6-switch", "type": "switch", "name": "online?", "property": "payload.online", "propertyType": "msg",
+        "rules": [{ "t": "false" }, { "t": "true" }], "checkall": "true", "repair": false, "outputs": 2, "x": 320, "y": 100,
+        "wires": [["ex6-alarm"], ["ex6-ok"]]
+    },
+    {
+        "id": "ex6-alarm", "type": "debug", "name": "ALARM: device offline (payload.error.code)", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 590, "y": 80, "wires": []
+    },
+    {
+        "id": "ex6-ok", "type": "debug", "name": "device online", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "payload", "targetType": "msg", "x": 520, "y": 120, "wires": []
+    },
+    {
+        "id": "ex6-in-end", "type": "inject", "name": "end of test", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "0", "payloadType": "num", "x": 120, "y": 240, "wires": [["ex6-sp0"]]
+    },
+    {
+        "id": "ex6-sp0", "type": "alicat-setpoint", "name": "setpoint 0", "device": "ex6-dev", "value": "payload", "valueType": "msg",
+        "variable": "current", "switchMode": "bumpless", "outOfRange": "clamp", "verify": true, "savePowerUp": false,
+        "x": 280, "y": 240, "wires": [["ex6-hold"]]
+    },
+    {
+        "id": "ex6-hold", "type": "alicat-command", "name": "hold valve closed", "device": "ex6-dev", "command": "holdClosed",
+        "arg": "payload", "argType": "msg", "allowRaw": false, "rawId": "", "rawArg": "", "fallbackSetpointZero": true,
+        "x": 460, "y": 240, "wires": [["ex6-read"]]
+    },
+    {
+        "id": "ex6-read", "type": "alicat-read", "name": "read back", "device": "ex6-dev", "trigger": "input", "interval": "1000",
+        "dataset": "live", "output": "object", "reading": "massFlow", "emit": "always", "topic": "", "contextScope": "global",
+        "contextKey": "", "contextStore": "", "x": 640, "y": 240, "wires": [["ex6-check"]]
+    },
+    {
+        "id": "ex6-check", "type": "switch", "name": "holding?", "property": "alicat.status.flags.holding", "propertyType": "msg",
+        "rules": [{ "t": "true" }, { "t": "else" }], "checkall": "true", "repair": false, "outputs": 2, "x": 790, "y": 240,
+        "wires": [["ex6-safe"], ["ex6-unsafe"]]
+    },
+    {
+        "id": "ex6-safe", "type": "debug", "name": "safe state confirmed", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "payload", "targetType": "msg", "x": 980, "y": 220, "wires": []
+    },
+    {
+        "id": "ex6-unsafe", "type": "debug", "name": "NOT in safe state", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "payload", "targetType": "msg", "x": 970, "y": 260, "wires": []
+    },
+    {
+        "id": "ex6-catch", "type": "catch", "name": "safe-state sequence failed", "scope": ["ex6-sp0", "ex6-hold", "ex6-read"],
+        "uncaught": false, "x": 170, "y": 320, "wires": [["ex6-failed"]]
+    },
+    {
+        "id": "ex6-failed", "type": "debug", "name": "NOT in safe state: msg.alicat.error", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "alicat.error", "targetType": "msg", "x": 440, "y": 320, "wires": []
+    }
+]

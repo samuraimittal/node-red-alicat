@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.nyc_output/
+.dev/
+soak-results/
+*.log
+*.tgz
+/pkg/

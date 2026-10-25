@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2218" height="1026" viewBox="1866 3226 2218 1026">
+<title>3 · Writes: setpoints, commands and urgent valve commands</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="1866" y="3226" width="2218" height="1026" fill="#ffffff"/>
+<text class="body" x="1890" y="3282" font-size="24" fill="#1e1e1e">3 · Writes: setpoints, commands and urgent valve commands</text>
+<rect x="1890" y="3298" width="2170" height="930" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="1930" y="3352.8">A setpoint is a register write confirmed by reading it back. A command goes through the lane: one at a time, NOP first, confirmed by the echo registers.</tspan></text>
+<rect x="1930" y="3388" width="330" height="137" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1942" y="3412.9">1 · nodes/alicat-setpoint.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1942" y="3434.0">setSetpoint</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1942" y="3455.9">Evaluates the value; options: control variable,</tspan><tspan x="1942" y="3473.4">mode switch, out of range, verify, save as</tspan><tspan x="1942" y="3490.9">power-up.</tspan></text>
+<rect x="2370" y="3388" width="330" height="137" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2382" y="3412.9">2 · lib/AlicatDevice.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2382" y="3434.0">setSetpoint · setControlVariable</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2382" y="3455.9">Same control variable: write it. Another one:</tspan><tspan x="2382" y="3473.4">switch mode first.</tspan></text>
+<rect x="2810" y="3388" width="330" height="137" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2822" y="3412.9">3 · lib/device/setpoint.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2822" y="3434.0">planTarget · writeSetpoint</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2822" y="3455.9">Units and range (EINVALIDARG, or clamp).</tspan><tspan x="2822" y="3473.4">FC16 float32 to 1010–1011 at CONTROL; a</tspan><tspan x="2822" y="3490.9">newer setpoint replaces an unsent one</tspan><tspan x="2822" y="3508.4">(superseded).</tspan></text>
+<rect x="3250" y="3388" width="330" height="137" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="3412.9">4 · lib/device/setpoint.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="3434.0">readBack · withinTolerance</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="3455.9">Reads back 1350–1351 (Gen-1: the data-frame</tspan><tspan x="3262" y="3473.4">slot), up to 4 × 100 ms. verified, and outcome</tspan><tspan x="3262" y="3490.9">executed, only on a match.</tspan></text>
+<rect x="2590" y="3585" width="330" height="161" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="2602" y="3611.8">Mode switch (bumpless)</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2602" y="3633.9">lib/device/setpoint.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2602" y="3655.0">switchControlVariable</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2602" y="3676.9">Hold the valve where it is, set the loop variable</tspan><tspan x="2602" y="3694.4">(command 43, or 11 before 10v19), confirm,</tspan><tspan x="2602" y="3711.9">write the setpoint, resume. An urgent valve</tspan><tspan x="2602" y="3729.4">command meanwhile wins.</tspan></text>
+<rect x="1930" y="3806" width="330" height="161" rx="10" fill="#d0ebff" stroke="#1971c2" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1942" y="3830.9">1 · nodes/alicat-command.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="1942" y="3852.0">HANDLERS</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1942" y="3873.9">tare · valve · gas · totalizer reset · display lock ·</tspan><tspan x="1942" y="3891.4">raw {id, arg}. The PID node works the same way.</tspan></text>
+<rect x="2370" y="3806" width="330" height="161" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2382" y="3830.9">2 · lib/device/commands.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2382" y="3852.0">runCommand · selectGas · tare</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2382" y="3873.9">Builds the lane job; afterwards confirms the effect</tspan><tspan x="2382" y="3891.4">where it can (gas register, status bits, PID</tspan><tspan x="2382" y="3908.9">read-back).</tspan></text>
+<rect x="2810" y="3806" width="330" height="161" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2822" y="3830.9">3 · lib/CommandLane.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2822" y="3852.0">run · _drain · _interface</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2822" y="3873.9">One command at a time, 8 queued, 10 s deadline</tspan><tspan x="2822" y="3891.4">each. Interface: EXTENDED 1002–1009 (Gen-2)</tspan><tspan x="2822" y="3908.9">or LIMITED 1000–1001 (Gen-1).</tspan></text>
+<rect x="3250" y="3806" width="330" height="161" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="3830.9">4 · lib/lane/session.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="3852.0">waitOutForeign · nopAndSettle</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="3873.9">Read the echo; another command running?</tspan><tspan x="3262" y="3891.4">CONTROL waits. Write a NOP and settle: the</tspan><tspan x="3262" y="3908.9">device only runs a command that differs from the</tspan><tspan x="3262" y="3926.4">last write.</tspan></text>
+<rect x="3250" y="4027" width="330" height="161" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4051.9">5 · lib/lane/session.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3262" y="4073.0">send · awaitCompletion</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3262" y="4094.9">Write ID and argument in one FC16 frame (≥ 200</tspan><tspan x="3262" y="4112.4">ms after the NOP); poll the echo every 100 ms.</tspan><tspan x="3262" y="4129.9">Not picked up in 1 s: resend once if repeat-safe.</tspan></text>
+<rect x="3690" y="3806" width="330" height="161" rx="10" fill="#c5f6fa" stroke="#0c8599" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3702" y="3832.8">Outcome</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3702" y="3854.9">lib/node-red/message.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="3702" y="3876.0">alicatInfo · attachError</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3702" y="3897.9">executed · rejected (ECOMMAND) · unknown</tspan><tspan x="3702" y="3915.4">(EPREEMPTED, timeout, another master) ·</tspan><tspan x="3702" y="3932.9">superseded. On failure attachError replaces</tspan><tspan x="3702" y="3950.4">msg.alicat and done(err) reaches Catch.</tspan></text>
+<rect x="2370" y="4027" width="330" height="161" rx="10" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="2382" y="4053.8">Urgent: valve hold, exhaust, resume</tspan></text>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2382" y="4075.9">lib/device/commands.js</tspan></text>
+<text class="code" font-size="13" fill="#495057"><tspan x="2382" y="4097.0">valve · waitForStatus</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2382" y="4118.9">Skips the lane queue and interrupts the polling of</tspan><tspan x="2382" y="4136.4">a running command (EPREEMPTED). Confirmed</tspan><tspan x="2382" y="4153.9">by status bit 8 or 10; queuedBehind when the</tspan><tspan x="2382" y="4171.4">device was busy.</tspan></text>
+<polyline points="2266,3457 2364,3457" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="2706,3457 2804,3457" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2712" y="3447" width="87" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2755.5" y="3461.0">same variable</tspan></text>
+<polyline points="3146,3457 3244,3457" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3173" y="3447" width="45" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3195.5" y="3461.0">written</tspan></text>
+<polyline points="2535,3531 2717,3579" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2584" y="3545" width="85" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2626.5" y="3559.0">other variable</tspan></text>
+<polyline points="2794,3579 2975,3531" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2853" y="3545" width="63" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2884.5" y="3559.0">then write</tspan></text>
+<polyline points="2755,3752 2975,3800" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2780" y="3766" width="170" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2865" y="3780.0">hold · loop variable · resume</tspan></text>
+<polyline points="2266,3887 2364,3887" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="2706,3887 2804,3887" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2711" y="3877" width="88" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2755" y="3891.0">CONTROL job</tspan></text>
+<polyline points="3146,3887 3244,3887" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3154" y="3877" width="83" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3195.5" y="3891.0">LaneSession</tspan></text>
+<polyline points="3415,3973 3377,4021" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<polyline points="3454,4021 3855,3973" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3637" y="3987" width="35" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3654.5" y="4001.0">echo</tspan></text>
+<polyline points="3415,3531 3855,3800" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="3603" y="3655" width="64" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="3635" y="3669.0">read-back</tspan></text>
+<polyline points="2095,3973 2497,4021" fill="none" stroke="#1971c2" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#head-flow)"/>
+<rect x="2278" y="3987" width="37" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2296.5" y="4001.0">valve</tspan></text>
+<polyline points="2574,4021 2975,3973" fill="none" stroke="#e03131" stroke-width="2" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#head-failure)"/>
+<rect x="2713" y="3987" width="124" height="21" fill="#ffffff" fill-opacity="0.9"/>
+<text class="body" font-size="13" fill="#495057" text-anchor="middle"><tspan x="2775" y="4001.0">URGENT: pre-empts</tspan></text>
+</svg>

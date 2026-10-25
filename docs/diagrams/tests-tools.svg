@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2768" height="1308" viewBox="1866 5346 2768 1308">
+<title>7 · Tests, simulator and tools</title>
+<style>.body{font-family:Helvetica, Arial, sans-serif}.code{font-family:'Cascadia Code', Consolas, 'Courier New', monospace}</style>
+<defs><marker id="head-require" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#868e96"/></marker><marker id="head-event" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9c36b5"/></marker><marker id="head-flow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1971c2"/></marker><marker id="head-failure" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e03131"/></marker><marker id="head-drives" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c2255c"/></marker></defs>
+<rect x="1866" y="5346" width="2768" height="1308" fill="#ffffff"/>
+<text class="body" x="1890" y="5402" font-size="24" fill="#1e1e1e">7 · Tests, simulator and tools</text>
+<rect x="1890" y="5418" width="2720" height="1212" rx="12" fill="none" stroke="#ced4da" stroke-width="1"/>
+<text class="body" font-size="16" fill="#495057"><tspan x="1930" y="5472.8">The simulator stands in for an instrument in every suite but hil. Arrows to lib/ are listed under &quot;uses&quot;.</tspan></text>
+<rect x="1930" y="5508" width="1300" height="390" rx="10" fill="#fff0f6" stroke="#c2255c" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#c2255c"><tspan x="1950" y="5546.5">Command-line tools (published)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1950" y="5569.9">Bins of the package, and npm run dev.</tspan></text>
+<rect x="1950" y="5595" width="300" height="163" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1962" y="5619.9">tools/alicat-sim.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1962" y="5641.9">alicat-sim: one simulator on a port, with a</tspan><tspan x="1962" y="5659.4">profile and a connection limit.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="1962" y="5679.1">uses: cli</tspan></text>
+<rect x="2270" y="5595" width="300" height="163" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2282" y="5619.9">tools/dev.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2282" y="5641.9">npm run dev: three simulators (ports</tspan><tspan x="2282" y="5659.4">5020–5022) and Node-RED with this</tspan><tspan x="2282" y="5676.9">package linked in.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2282" y="5697.1">uses: cli</tspan></text>
+<rect x="2590" y="5595" width="300" height="163" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2602" y="5619.9">tools/alicat-probe.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2602" y="5641.9">alicat-probe: bench CLI over a raw</tspan><tspan x="2602" y="5659.4">transport: info, read, watch, status, write,</tspan><tspan x="2602" y="5676.9">command, idle.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2602" y="5697.1">uses: modbus/ModbusTcpTransport · modbus/pdu</tspan><tspan x="2602" y="5712.1">· alicat/codec · alicat/firmware · alicat/registers ·</tspan><tspan x="2602" y="5727.1">alicat/commands · alicat/status-bits · errors ·</tspan><tspan x="2602" y="5742.1">util/timers · cli</tspan></text>
+<rect x="2910" y="5595" width="300" height="163" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2922" y="5619.9">tools/cli.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2922" y="5641.9">Strict argument parsing for the tools.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2922" y="5662.1">used by: alicat-sim · dev · alicat-probe ·</tspan><tspan x="2922" y="5677.1">architecture-diagram</tspan></text>
+<rect x="3270" y="5508" width="1300" height="390" rx="10" fill="#f8f9fa" stroke="#495057" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#495057"><tspan x="3290" y="5546.5">Repository checks (not published)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="3290" y="5569.9">Run by npm run check and npm run diagram.</tspan></text>
+<rect x="3290" y="5595" width="300" height="163" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3302" y="5619.9">tools/check-pack.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3302" y="5641.9">npm run check:pack: what npm pack would</tspan><tspan x="3302" y="5659.4">publish; every node file and the whole</tspan><tspan x="3302" y="5676.9">require graph, nothing else.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3302" y="5697.1">uses: require-graph</tspan></text>
+<rect x="3610" y="5595" width="300" height="163" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3622" y="5619.9">tools/architecture-diagram.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="5641.9">npm run diagram: writes docs/diagrams/</tspan><tspan x="3622" y="5659.4">(this diagram); --check fails when it is out of</tspan><tspan x="3622" y="5676.9">date.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3622" y="5697.1">uses: cli · require-graph</tspan></text>
+<rect x="4250" y="5595" width="300" height="163" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="4262" y="5619.9">tools/require-graph.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="4262" y="5641.9">The package's relative require graph,</tspan><tspan x="4262" y="5659.4">shared by the pack check and this diagram.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="4262" y="5679.1">used by: check-pack · architecture-diagram ·</tspan><tspan x="4262" y="5694.1">diagram/layout</tspan></text>
+<rect x="3290" y="5778" width="300" height="100" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3302" y="5802.9">tools/diagram/spec.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3302" y="5824.9">This diagram's content: zones, file roles,</tspan><tspan x="3302" y="5842.4">storyboards. Edit this, then npm run</tspan><tspan x="3302" y="5859.9">diagram.</tspan></text>
+<rect x="3610" y="5778" width="300" height="100" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3622" y="5802.9">tools/diagram/excalidraw.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="5824.9">Writes the scene as an .excalidraw file with</tspan><tspan x="3622" y="5842.4">stable ids and seeds.</tspan></text>
+<rect x="3930" y="5778" width="300" height="100" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3942" y="5802.9">tools/diagram/layout.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3942" y="5824.9">Box sizes from wrapped text, rows lined up</tspan><tspan x="3942" y="5842.4">per band, arrows between facing sides.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3942" y="5862.1">uses: require-graph</tspan></text>
+<rect x="4250" y="5778" width="300" height="100" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="4262" y="5802.9">tools/diagram/svg.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="4262" y="5824.9">Writes each view as an SVG for GitHub and</tspan><tspan x="4262" y="5842.4">the docs.</tspan></text>
+<rect x="1930" y="5968" width="1620" height="622" rx="10" fill="#fff0f6" stroke="#c2255c" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#c2255c"><tspan x="1950" y="6006.5">Simulator (tools/sim/)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="1950" y="6029.9">A Modbus TCP Alicat with the measured command behaviour and injectable faults.</tspan></text>
+<rect x="2590" y="6055" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2602" y="6079.9">tools/sim/AlicatSimulator.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2602" y="6101.9">One simulated instrument: model, register</tspan><tspan x="2602" y="6119.4">map, command engine, server. Profiles</tspan><tspan x="2602" y="6136.9">10v20-mfc, 10v20-bench, 9v07-bench.</tspan></text>
+<rect x="1950" y="6193" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="1962" y="6217.9">tools/sim/DeviceModel.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="1962" y="6239.9">Deterministic first-order process: flow,</tspan><tspan x="1962" y="6257.4">pressure or valve follows the setpoint; hold</tspan><tspan x="1962" y="6274.9">and exhaust override.</tspan></text>
+<rect x="2270" y="6193" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2282" y="6217.9">tools/sim/CommandEngine.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2282" y="6239.9">Command registers as measured: ~120 ms</tspan><tspan x="2282" y="6257.4">cycle, runs only changed writes, writes the</tspan><tspan x="2282" y="6274.9">echoes; test hooks.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2282" y="6295.1">uses: alicat/codec · alicat/registers · alicat/gases</tspan></text>
+<rect x="2590" y="6193" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2602" y="6217.9">tools/sim/ModbusTcpServer.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2602" y="6239.9">Minimal Modbus TCP server (FC04, FC16):</tspan><tspan x="2602" y="6257.4">connection limit, idle timeout, fault injection.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2602" y="6277.1">uses: modbus/pdu · modbus/exceptions</tspan></text>
+<rect x="2910" y="6193" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2922" y="6217.9">tools/sim/profiles/gen2.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2922" y="6239.9">The 10v20 register map: firmware, serial,</tspan><tspan x="2922" y="6257.4">standard and optimized blocks, info blocks.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2922" y="6277.1">uses: alicat/registers · alicat/codec</tspan></text>
+<rect x="3230" y="6193" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="3242" y="6217.9">tools/sim/profiles/gen1.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3242" y="6239.9">The 9v07 register map: limited commands,</tspan><tspan x="3242" y="6257.4">write-only setpoint, gas, status, float slots.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="3242" y="6277.1">uses: alicat/registers · alicat/codec</tspan></text>
+<rect x="2910" y="6331" width="300" height="118" rx="10" fill="#ffdeeb" stroke="#c2255c" stroke-width="1.5"/>
+<text class="code" font-size="14" fill="#1e1e1e"><tspan x="2922" y="6355.9">tools/sim/RegisterBank.js</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="2922" y="6377.9">Sparse 1-based register store: write groups,</tspan><tspan x="2922" y="6395.4">capture-only and write-only registers; else</tspan><tspan x="2922" y="6412.9">exception 02.</tspan></text>
+<text class="body" font-size="12" fill="#868e96"><tspan x="2922" y="6433.1">uses: modbus/exceptions · alicat/codec</tspan></text>
+<rect x="3590" y="5968" width="660" height="622" rx="10" fill="#f8f9fa" stroke="#495057" stroke-width="1" stroke-dasharray="8 6"/>
+<text class="body" font-size="20" fill="#495057"><tspan x="3610" y="6006.5">Test suites (test/)</tspan></text>
+<text class="body" font-size="14" fill="#495057"><tspan x="3610" y="6029.9">npm test runs unit, integration and nodes; the others have their own scripts.</tspan></text>
+<rect x="3610" y="6055" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3622" y="6081.8">test/integration</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="6103.9">Real TCP against the simulator: transport,</tspan><tspan x="3622" y="6121.4">client, registry, device, lane (exact write</tspan><tspan x="3622" y="6138.9">sequences), reconciler, probe CLI.</tspan></text>
+<rect x="3930" y="6055" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3942" y="6081.8">test/unit</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3942" y="6103.9">Pure modules, fake transports and fake</tspan><tspan x="3942" y="6121.4">timers: codecs, queue, client state machine,</tspan><tspan x="3942" y="6138.9">identification, node helpers, typing guards,</tspan><tspan x="3942" y="6156.4">this diagram.</tspan></text>
+<rect x="3610" y="6193" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3622" y="6219.8">test/nodes</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="6241.9">Every node and option in a Node-RED</tspan><tspan x="3622" y="6259.4">runtime (node-red-node-test-helper):</tspan><tspan x="3622" y="6276.9">redeploy, stop, example flows, editor</tspan><tspan x="3622" y="6294.4">definitions.</tspan></text>
+<rect x="3930" y="6193" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3942" y="6219.8">test/helpers</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3942" y="6241.9">wait, assert, device and node setup, a fake</tspan><tspan x="3942" y="6259.4">transport, a scripted raw Modbus server.</tspan></text>
+<rect x="3610" y="6331" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3622" y="6357.8">test/compat</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="6379.9">Smoke test with only Node-RED installed:</tspan><tspan x="3622" y="6397.4">Node 18 with Node-RED 4.0 and 4.1, and</tspan><tspan x="3622" y="6414.9">the packed tarball.</tspan></text>
+<rect x="3930" y="6331" width="300" height="118" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3942" y="6357.8">test/hil</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3942" y="6379.9">Real instruments, opt-in</tspan><tspan x="3942" y="6397.4">(ALICAT_HIL_HOST); writes only with</tspan><tspan x="3942" y="6414.9">ALICAT_HIL_WRITE=1.</tspan></text>
+<rect x="3610" y="6469" width="300" height="101" rx="10" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>
+<text class="body" font-size="16" fill="#1e1e1e"><tspan x="3622" y="6495.8">test/soak</tspan></text>
+<text class="body" font-size="14" fill="#1e1e1e"><tspan x="3622" y="6517.9">24 h: embedded Node-RED, 20 simulators</tspan><tspan x="3622" y="6535.4">plus real units read-only, scheduled faults</tspan><tspan x="3622" y="6552.9">and redeploys; checks recovery and leaks.</tspan></text>
+<polyline points="2100,5764 2705,6049" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2420,5764 2775,6049" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3781,5764 4080,5772" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3739,5764 3760,5772" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3823,5764 4400,5772" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3697,5764 3440,5772" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3916,5828 3924,5828" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="4244,5828 4236,5828" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2670,6179 2100,6187" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2740,6179 2740,6187" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2705,6179 2420,6187" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2775,6179 3060,6187" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2810,6179 3380,6187" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="2740,6317 3008,6325" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3060,6317 3060,6325" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3380,6317 3113,6325" fill="none" stroke="#868e96" stroke-width="1" stroke-linejoin="round" marker-end="url(#head-require)"/>
+<polyline points="3604,6114 3556,6148" fill="none" stroke="#c2255c" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="2 5" marker-end="url(#head-drives)"/>
+<polyline points="3604,6252 3556,6235" fill="none" stroke="#c2255c" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="2 5" marker-end="url(#head-drives)"/>
+<polyline points="3604,6390 3556,6323" fill="none" stroke="#c2255c" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="2 5" marker-end="url(#head-drives)"/>
+<polyline points="3604,6520 3556,6410" fill="none" stroke="#c2255c" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="2 5" marker-end="url(#head-drives)"/>
+</svg>

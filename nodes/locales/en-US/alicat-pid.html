@@ -1,0 +1,29 @@
+<script type="text/markdown" data-help-name="alicat-pid">
+Reads or writes the instrument's closed-loop control gains, or sets the loop algorithm.
+
+### Inputs
+
+Any message runs the configured action.
+
+: *payload.p* (number) : P gain to write (0–65535). The sources are configurable.
+: *payload.d* (number) : D gain to write.
+: *payload.i* (number) : I gain to write.
+: *algorithm* (string) : `PDF` or `PD2I`, for **Set loop algorithm**. Overrides the setting.
+
+### Outputs
+
+: payload (object) : `{p, d, i}` as read from the device, after a write as well; for **Set loop algorithm**, `{algorithm, outcome}`.
+: payload.outcome (string) : after a write: `executed` if the read-back matches, otherwise `unknown`.
+: alicat.op (string) : `pid`.
+: alicat.outcome (string) : after a write or an algorithm change: the outcome.
+
+### Details
+
+Over Modbus TCP, Alicat has no PID registers. The gains are set with commands 8 (P), 9 (D) and 10 (I), and read with command 14. The legacy holding registers 21–23 exist only on Modbus RTU.
+
+**Careful with the default PD/PDF algorithm:** Alicat's *D* gain acts like the classical **P** term, and its *P* gain like the classical **I** term. In PD²I the gains behave classically. Change gains in small steps and watch the response.
+
+The device can't report which algorithm is active, only the gains.
+
+Errors (a gain out of range, no gain to write, an unknown algorithm) go to Catch nodes with `msg.alicat.error`.
+</script>

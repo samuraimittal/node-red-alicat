@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Action versions are pinned by major tag; pin to commit SHAs if your
+# organisation's supply-chain policy requires it.
+
+jobs:
+  check:
+    name: Lint, types, coverage, package contents
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify the registry signatures of installed packages
+        run: npm audit signatures
+      # Lint, both typechecks, tests with coverage, the runtime smoke test and the pack-list check.
+      - run: npm run check
+      - name: Runtime smoke test against the packed tarball (what users install)
+        run: |
+          npm pack
+          mkdir -p pkg
+          tar -xzf samuraimittal-node-red-alicat-*.tgz -C pkg
+          node test/compat/runtime-smoke.js --package pkg/package
+
+  test:
+    name: Node ${{ matrix.node }} / Node-RED ${{ matrix.node-red }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+        node-red: ['4.0', '4.1.16', '5.0.8']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - name: Use Node-RED ${{ matrix.node-red }}
+        run: npm install --no-save --no-audit --no-fund node-red@${{ matrix.node-red }}
+      - run: npm test
+      - run: npm run test:compat
+
+  windows:
+    name: Windows / Node 24
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:compat
+
+  runtime-only:
+    # The dev toolchain (mocha, c8, eslint) needs Node 20.19+, so on the oldest
+    # supported Node versions only the runtime is checked: the package with
+    # Node-RED 4 and nothing else.
+    name: Node ${{ matrix.node }} / Node-RED ${{ matrix.node-red }} (runtime only)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { node: 18, node-red: '4.0' }
+          - { node: 18, node-red: '4.1.16' }
+          - { node: 20, node-red: '4.1.16' }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Node-RED ${{ matrix.node-red }} only
+        run: |
+          npm pkg delete devDependencies
+          npm install --no-save --no-audit --no-fund node-red@${{ matrix.node-red }}
+      - run: npm run test:compat

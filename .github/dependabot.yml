@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Development dependencies only: the package itself has no runtime dependencies.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dev-tooling:
+        patterns: ['*']
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

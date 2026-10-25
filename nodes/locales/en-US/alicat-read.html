@@ -1,0 +1,39 @@
+<script type="text/markdown" data-help-name="alicat-read">
+Reads live data from an Alicat instrument, decoded into engineering units.
+
+### Inputs
+
+Any message triggers an immediate read, in either mode.
+
+### Outputs
+
+: payload (object | number) : all readings, e.g. `{massFlow, volumetricFlow, gaugePressure, absolutePressure, temperature, setpoint, valveDrive}`, or the one chosen reading. A reading the instrument doesn't have is absent, and an invalid reading is `null`.
+: topic (string) : the configured topic, the device name, or the reading name.
+: alicat.op (string) : `read`.
+: alicat.device, host, port, unitId, generation, firmware, serial : which instrument.
+: alicat.quality (string) : `good`, `stale` (the device stopped answering; values are the last good ones) or `offline`.
+: alicat.ts (number) : when the reply arrived (ms epoch), for rate and slope calculations.
+: alicat.ageMs (number) : how old the values are: 0 for a fresh reading, the time since the last good one when stale or offline.
+: alicat.rttMs (number) : the round trip of the read that produced these values.
+: alicat.units (object) : the unit of each reading, e.g. `{massFlow: "SCCM", gaugePressure: "PSIG"}`.
+: alicat.setpoint (number) : the current setpoint, if the instrument reports one.
+: alicat.controlledVariable (string) : what the setpoint controls: `massFlow`, `gaugePressure`, `valveDrive`…
+: alicat.gas (object) : `{number, symbol, name}`.
+: alicat.status (object) : decoded status bits: `{raw, active, flags}`, e.g. `flags.holding`, `flags.exhausting`.
+: alicat.alarms (object) : firmware 10v07 and newer: `{raw, alarm1, alarm2}`; otherwise `null`.
+: alicat.error (object) : on a `stale` or `offline` message: `{code, message}` of the failure.
+
+### Details
+
+All read nodes on one device share **one** poll loop. Several nodes cost one Modbus read per cycle, at the fastest interval any of them asks for.
+
+When the device stops answering, the node sends one message with `alicat.quality` set to `stale` or `offline`, then waits. It never keeps sending frozen values as if they were live.
+
+**Publish to** writes one frozen snapshot `{ts, quality, values, status, units, …}` to flow or global context, for existing flows that read globals. Each key has a single writer: a second node publishing the same key is refused. Readers should check `quality === "good"` and the age (`Date.now() - ts`) before acting on the values. **Store** lists the context stores in settings.js; use an in-memory one for live data.
+
+Read **Identity** to get the firmware, serial number, control mode, and each reading's units, decimals and range.
+
+### References
+
+- [Status bits and units](https://documents.alicat.com/manuals/DOC-MANUAL-MODBUS.pdf)
+</script>

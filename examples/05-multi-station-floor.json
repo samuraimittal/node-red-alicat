@@ -1,0 +1,56 @@
+[
+    {
+        "id": "ex5-comment", "type": "comment", "name": "Two stations, one flow. Simulators: npx --no -- alicat-sim --port 5020 and --port 5021",
+        "info": "Each device config is one instrument (one IP, native Ethernet). Every instrument gets exactly one TCP connection, whatever the number of nodes using it.\n\nThe join sends one object per round with both stations. If a station stops answering, the object arrives after 2 s without it, and the last message from that station carries quality \"stale\" or \"offline\".",
+        "x": 360, "y": 40, "wires": []
+    },
+    {
+        "id": "ex5-dev1", "type": "alicat-device", "name": "Station 1", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex5-dev2", "type": "alicat-device", "name": "Station 2", "host": "127.0.0.1", "port": "5021", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex5-read1", "type": "alicat-read", "name": "station 1", "device": "ex5-dev1", "trigger": "interval", "interval": "1000",
+        "dataset": "live", "output": "object", "reading": "massFlow", "emit": "always", "topic": "station1", "contextScope": "global",
+        "contextKey": "", "contextStore": "", "x": 140, "y": 100, "wires": [["ex5-tag"]]
+    },
+    {
+        "id": "ex5-read2", "type": "alicat-read", "name": "station 2", "device": "ex5-dev2", "trigger": "interval", "interval": "1000",
+        "dataset": "live", "output": "object", "reading": "massFlow", "emit": "always", "topic": "station2", "contextScope": "global",
+        "contextKey": "", "contextStore": "", "x": 140, "y": 160, "wires": [["ex5-tag"]]
+    },
+    {
+        "id": "ex5-tag", "type": "change", "name": "values + quality", "rules": [
+            { "t": "set", "p": "payload", "pt": "msg", "to": "{\"values\": payload, \"quality\": alicat.quality, \"ts\": alicat.ts}", "tot": "jsonata" }
+        ], "action": "", "property": "", "from": "", "to": "", "reg": false, "x": 340, "y": 130, "wires": [["ex5-join"]]
+    },
+    {
+        "id": "ex5-join", "type": "join", "name": "both stations, once per round", "mode": "custom", "build": "object", "property": "payload",
+        "propertyType": "msg", "key": "topic", "joiner": "\\n", "joinerType": "str", "useparts": false, "accumulate": false,
+        "timeout": "2", "count": "2", "reduceRight": false, "reduceExp": "", "reduceInit": "", "reduceInitType": "",
+        "reduceFixup": "", "x": 540, "y": 130, "wires": [["ex5-debug"]]
+    },
+    {
+        "id": "ex5-debug", "type": "debug", "name": "{station1: {values, quality, ts}, station2: {...}}", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 790, "y": 130, "wires": []
+    },
+    {
+        "id": "ex5-status1", "type": "alicat-status", "name": "station 1 link", "device": "ex5-dev1", "periodic": "0",
+        "x": 150, "y": 230, "wires": [["ex5-debug-links"]]
+    },
+    {
+        "id": "ex5-status2", "type": "alicat-status", "name": "station 2 link", "device": "ex5-dev2", "periodic": "0",
+        "x": 150, "y": 280, "wires": [["ex5-debug-links"]]
+    },
+    {
+        "id": "ex5-debug-links", "type": "debug", "name": "link state changes", "active": true, "tosidebar": true, "console": false,
+        "tostatus": false, "complete": "payload", "targetType": "msg", "x": 380, "y": 255, "wires": []
+    }
+]

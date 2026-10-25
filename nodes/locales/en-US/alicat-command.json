@@ -1,0 +1,60 @@
+{
+    "alicat-command": {
+        "paletteLabel": "command",
+        "label": {
+            "default": "alicat command",
+            "command": "Command",
+            "gas": "Gas",
+            "fallback": "Fallback",
+            "raw": "Raw",
+            "rawId": "Command ID",
+            "rawArg": "Argument"
+        },
+        "group": {
+            "tare": "Tare",
+            "totalizer": "Totalizer",
+            "valve": "Valve (urgent)",
+            "other": "Other"
+        },
+        "command": {
+            "tareFlow": "Tare flow (no flow present)",
+            "tareAbsolutePressure": "Tare absolute pressure",
+            "tareGaugePressure": "Tare gauge pressure",
+            "resetTotalizer1": "Reset totalizer 1",
+            "resetTotalizer2": "Reset totalizer 2 (10v19+)",
+            "holdClosed": "Hold valve closed",
+            "holdCurrent": "Hold valve at current position",
+            "exhaust": "Exhaust (dual-valve only)",
+            "resume": "Resume closed-loop control",
+            "selectGas": "Select gas",
+            "lockDisplay": "Lock front panel",
+            "unlockDisplay": "Unlock front panel",
+            "msg": "From msg.command",
+            "raw": "Raw command (advanced)"
+        },
+        "short": {
+            "tareFlow": "tare flow",
+            "tareAbsolutePressure": "tare abs pressure",
+            "tareGaugePressure": "tare gauge pressure",
+            "resetTotalizer1": "reset totalizer 1",
+            "resetTotalizer2": "reset totalizer 2",
+            "holdClosed": "hold valve closed",
+            "holdCurrent": "hold valve",
+            "exhaust": "exhaust",
+            "resume": "resume control",
+            "selectGas": "select gas",
+            "lockDisplay": "lock display",
+            "unlockDisplay": "unlock display",
+            "msg": "msg.command",
+            "raw": "raw command"
+        },
+        "tip": {
+            "fallback": "if the hold must wait behind a running command, write setpoint 0 at once",
+            "raw": "allow raw command IDs (factory reset and RTU-only commands stay blocked)"
+        },
+        "port": {
+            "input": "trigger",
+            "output": "result"
+        }
+    }
+}

@@ -1,0 +1,45 @@
+[
+    {
+        "id": "ex1-comment", "type": "comment", "name": "Poll an Alicat. Start the simulator first: npx --no -- alicat-sim (or point the device at your instrument)",
+        "info": "All read nodes on one device share one poll loop and one TCP connection.\n\nThe device config's **Test connection** button shows the firmware, mode and live values before you deploy.",
+        "x": 330, "y": 40, "wires": []
+    },
+    {
+        "id": "ex1-dev", "type": "alicat-device", "name": "Simulated MFC", "host": "127.0.0.1", "port": "5020", "unitId": "1",
+        "mapMode": "auto", "deviceType": "auto", "layout": "auto", "customLayout": "", "controlVariable": "unknown", "unitLabels": "",
+        "requestTimeout": "1000", "connectTimeout": "5000", "interFrameDelay": "20", "heartbeat": "5000", "backoffMax": "30000",
+        "maxQueue": "200", "trace": false
+    },
+    {
+        "id": "ex1-read-all", "type": "alicat-read", "name": "all readings, every second", "device": "ex1-dev", "trigger": "interval",
+        "interval": "1000", "dataset": "live", "output": "object", "reading": "massFlow", "emit": "always", "topic": "",
+        "contextScope": "global", "contextKey": "", "contextStore": "", "x": 170, "y": 100, "wires": [["ex1-debug-all"]]
+    },
+    {
+        "id": "ex1-debug-all", "type": "debug", "name": "readings + msg.alicat (units, quality, status)", "active": true,
+        "tosidebar": true, "console": false, "tostatus": false, "complete": "true", "targetType": "full", "x": 480, "y": 100, "wires": []
+    },
+    {
+        "id": "ex1-read-mass", "type": "alicat-read", "name": "mass flow, only on change", "device": "ex1-dev", "trigger": "interval",
+        "interval": "500", "dataset": "live", "output": "value", "reading": "massFlow", "emit": "change", "topic": "massFlow",
+        "contextScope": "global", "contextKey": "", "contextStore": "", "x": 170, "y": 160, "wires": [["ex1-debug-mass"]]
+    },
+    {
+        "id": "ex1-debug-mass", "type": "debug", "name": "mass flow (number, for charts)", "active": true, "tosidebar": true,
+        "console": false, "tostatus": true, "complete": "payload", "targetType": "msg", "statusVal": "payload", "statusType": "auto",
+        "x": 450, "y": 160, "wires": []
+    },
+    {
+        "id": "ex1-inject-id", "type": "inject", "name": "identify", "props": [{ "p": "payload" }], "repeat": "", "crontab": "",
+        "once": false, "onceDelay": 0.1, "topic": "", "payload": "", "payloadType": "date", "x": 110, "y": 220, "wires": [["ex1-read-id"]]
+    },
+    {
+        "id": "ex1-read-id", "type": "alicat-read", "name": "identity", "device": "ex1-dev", "trigger": "input", "interval": "1000",
+        "dataset": "identity", "output": "object", "reading": "massFlow", "emit": "always", "topic": "", "contextScope": "global",
+        "contextKey": "", "contextStore": "", "x": 270, "y": 220, "wires": [["ex1-debug-id"]]
+    },
+    {
+        "id": "ex1-debug-id", "type": "debug", "name": "firmware, serial, mode, units, ranges", "active": true, "tosidebar": true,
+        "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 490, "y": 220, "wires": []
+    }
+]

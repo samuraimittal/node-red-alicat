@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="resources/@samuraimittal/node-red-alicat/alicat-device.css">
+<script src="resources/@samuraimittal/node-red-alicat/alicat-editor.js"></script>
+<script src="resources/@samuraimittal/node-red-alicat/alicat-device.js"></script>
+
+<script type="text/html" data-template-name="alicat-device">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-config-input-name" data-i18n="[placeholder]alicat-device.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-server"></i> <span data-i18n="alicat-device.label.host"></span></label>
+        <input type="text" id="node-config-input-host" data-i18n="[placeholder]alicat-device.placeholder.host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="fa fa-random"></i> <span data-i18n="alicat-device.label.port"></span></label>
+        <input type="text" id="node-config-input-port" style="width:80px">
+        <label for="node-config-input-unitId" style="width:auto; margin-left:20px" data-i18n="alicat-device.label.unitId"></label>
+        <input type="text" id="node-config-input-unitId" style="width:60px">
+    </div>
+    <div class="form-row">
+        <label>&nbsp;</label>
+        <button type="button" class="red-ui-button" id="alicat-test-button"><i class="fa fa-plug"></i> <span data-i18n="alicat-device.label.test"></span></button>
+        <div id="alicat-test-result" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="alicat-section" data-i18n="alicat-device.label.gen1"></div>
+    <div class="form-row">
+        <label for="node-config-input-layout"><i class="fa fa-th-list"></i> <span data-i18n="alicat-device.label.layout"></span></label>
+        <select id="node-config-input-layout">
+            <option value="auto" data-i18n="alicat-device.layout.auto"></option>
+            <option value="extended-7" data-i18n="alicat-device.layout.extended-7"></option>
+            <option value="mfc" data-i18n="alicat-device.layout.mfc"></option>
+            <option value="mfc-totalizer" data-i18n="alicat-device.layout.mfc-totalizer"></option>
+            <option value="mfm" data-i18n="alicat-device.layout.mfm"></option>
+            <option value="mfm-totalizer" data-i18n="alicat-device.layout.mfm-totalizer"></option>
+            <option value="pc" data-i18n="alicat-device.layout.pc"></option>
+            <option value="pg" data-i18n="alicat-device.layout.pg"></option>
+            <option value="custom" data-i18n="alicat-device.layout.custom"></option>
+        </select>
+    </div>
+    <div class="form-row" id="alicat-custom-layout-row">
+        <label for="node-config-input-customLayout" data-i18n="alicat-device.label.slots"></label>
+        <input type="text" id="node-config-input-customLayout" data-i18n="[placeholder]alicat-device.placeholder.slots">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceType"><i class="fa fa-cube"></i> <span data-i18n="alicat-device.label.deviceType"></span></label>
+        <select id="node-config-input-deviceType">
+            <option value="auto" data-i18n="alicat-device.deviceType.auto"></option>
+            <option value="mfc" data-i18n="alicat-device.deviceType.mfc"></option>
+            <option value="mfm" data-i18n="alicat-device.deviceType.mfm"></option>
+            <option value="pc" data-i18n="alicat-device.deviceType.pc"></option>
+            <option value="pg" data-i18n="alicat-device.deviceType.pg"></option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-controlVariable"><i class="fa fa-sliders"></i> <span data-i18n="alicat-device.label.controlVariable"></span></label>
+        <select id="node-config-input-controlVariable">
+            <option value="unknown" data-i18n="alicat-device.controlVariable.unknown"></option>
+            <option value="massFlow" data-i18n="alicat-device.controlVariable.massFlow"></option>
+            <option value="volumetricFlow" data-i18n="alicat-device.controlVariable.volumetricFlow"></option>
+            <option value="absolutePressure" data-i18n="alicat-device.controlVariable.absolutePressure"></option>
+            <option value="gaugePressure" data-i18n="alicat-device.controlVariable.gaugePressure"></option>
+            <option value="differentialPressure" data-i18n="alicat-device.controlVariable.differentialPressure"></option>
+            <option value="valveDrive" data-i18n="alicat-device.controlVariable.valveDrive"></option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-unitLabels"><i class="fa fa-font"></i> <span data-i18n="alicat-device.label.unitLabels"></span></label>
+        <input type="text" id="node-config-input-unitLabels" data-i18n="[placeholder]alicat-device.placeholder.unitLabels">
+    </div>
+
+    <div class="form-row">
+        <a href="#" id="alicat-advanced-toggle"><i class="fa fa-caret-right"></i> <span data-i18n="alicat-device.label.advanced"></span></a>
+    </div>
+    <div id="alicat-advanced" style="display:none">
+        <div class="form-row">
+            <label for="node-config-input-mapMode" data-i18n="alicat-device.label.mapMode"></label>
+            <select id="node-config-input-mapMode">
+                <option value="auto" data-i18n="alicat-device.mapMode.auto"></option>
+                <option value="modern" data-i18n="alicat-device.mapMode.modern"></option>
+                <option value="legacy" data-i18n="alicat-device.mapMode.legacy"></option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="node-config-input-requestTimeout" data-i18n="alicat-device.label.requestTimeout"></label>
+            <input type="text" id="node-config-input-requestTimeout" style="width:80px">
+            <label for="node-config-input-connectTimeout" style="width:auto; margin-left:20px" data-i18n="alicat-device.label.connectTimeout"></label>
+            <input type="text" id="node-config-input-connectTimeout" style="width:80px">
+        </div>
+        <div class="form-row">
+            <label for="node-config-input-interFrameDelay" data-i18n="alicat-device.label.interFrameDelay"></label>
+            <input type="text" id="node-config-input-interFrameDelay" style="width:80px">
+            <label for="node-config-input-heartbeat" style="width:auto; margin-left:20px" data-i18n="alicat-device.label.heartbeat"></label>
+            <input type="text" id="node-config-input-heartbeat" style="width:80px">
+        </div>
+        <div class="form-row">
+            <label for="node-config-input-backoffMax" data-i18n="alicat-device.label.backoffMax"></label>
+            <input type="text" id="node-config-input-backoffMax" style="width:80px">
+            <label for="node-config-input-maxQueue" style="width:auto; margin-left:20px" data-i18n="alicat-device.label.maxQueue"></label>
+            <input type="text" id="node-config-input-maxQueue" style="width:80px">
+        </div>
+        <div class="form-row">
+            <label for="node-config-input-trace" data-i18n="alicat-device.label.trace"></label>
+            <input type="checkbox" id="node-config-input-trace" style="width:auto">
+            <label for="node-config-input-trace" style="width:auto" data-i18n="alicat-device.tip.trace"></label>
+        </div>
+    </div>
+</script>

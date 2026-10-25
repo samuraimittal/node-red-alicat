@@ -1,0 +1,32 @@
+<script type="text/markdown" data-help-name="alicat-status">
+Reports the connection and device state, for alarms and dashboards.
+
+### Inputs
+
+: topic (string) : `reconnect` drops and reopens the connection now; `identify` re-identifies the device; anything else outputs the current statistics.
+
+### Outputs
+
+: topic (string) : `state` on every change (and once at start), `identity` when the instrument changed (firmware, serial or generation), `stats` periodically or on request.
+: payload.online (boolean) : `state` messages: true when connected **and** identified.
+: payload.state (string) : connection state: `CONNECTING`, `ONLINE`, `BACKOFF` (waiting to retry) or `CLOSED`.
+: payload.device (string) : device state: `IDENTIFYING`, `READY` or `FAILED`.
+: payload.previous (string) : the connection state before this change, or `null` when only the device state changed.
+: payload.previousDevice (string) : the device state before this change, or `null` when only the connection state changed.
+: payload.error (object) : `{code, message}` of the last failure. `code` is stable (e.g. `ECONNECT`, `ELINKDOWN`, `EIDENTIFY`, `EDUPLICATE`), and the OS error is in the log.
+: payload.attempt (number) : failed connection attempts in a row. It returns to 0 once the link has been stable for 10 s.
+: payload.nextRetryInMs (number) : when the next reconnect attempt happens.
+: payload.client (object) : `stats` messages: the connection's `state`, `host`, `port`, `attempt`, `depth` (requests waiting, per priority), `inFlight`, the counters `sent`, `ok`, `timeouts`, `exceptions`, `retries`, `linkSuspects` and `connects`, `queue` (superseded, evicted, expired and canceled requests), `rtt` (`last`, `avg`, `max` in ms), `lastError` and `transport`.
+: alicat.op (string) : `status`.
+: alicat.result.identity (object) : on `state` messages: `{generation, firmware, serial, controlledVariable, readings}`, or `null` before the device is identified.
+
+### Details
+
+The connection is supervised:
+- One request at a time.
+- A heartbeat keeps the link inside Alicat's ~20 s idle limit.
+- A dead link is detected after a few silent timeouts.
+- Reconnect attempts back off from 1 s up to the configured maximum.
+
+Use a **switch** on `payload.online` to raise an alarm.
+</script>

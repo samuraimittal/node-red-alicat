@@ -1,0 +1,34 @@
+<script type="text/markdown" data-help-name="alicat-control">
+Keeps an instrument at a desired state (setpoint, control mode and valve state), and corrects it if it drifts.
+
+### Inputs
+
+: payload (number | object) : a setpoint, or any of `{setpoint, variable, valve}`. Keys you leave out keep their desired value.
+: payload.variable (string) : `massFlow`, `volumetricFlow`, `absolutePressure`, `gaugePressure`, `differentialPressure` or `valveDrive`.
+: payload.valve (string) : `auto` (closed-loop control), `hold-closed`, `hold-current` or `exhaust`.
+: topic (string) : `release` (or `payload: null`) stops maintaining and leaves the device as it is.
+
+### Outputs
+
+: topic (string) : the event: `accepted`, `correcting`, `converged`, `drift`, `failed`, `waiting` or `released`.
+: payload.event (string) : the same event.
+: payload.desired (object) : the desired state.
+: payload.actual (object) : what the device reports: `{setpoint, variable, valve}`. `valve` is `auto`, `holding` (the status bits don't tell a hold closed from a hold at the current position) or `exhaust`.
+: payload.dimension (string) : for `correcting`, `drift` and `failed`: which part (`variable`, `valve` or `setpoint`).
+: payload.attempts (number) : for `correcting` and `failed`: corrections tried for that part so far.
+: payload.sinceMs (number) : time since the desired state was last set.
+: payload.error (object) : for `failed`: the last error, `{code, message}`.
+: alicat.op (string) : `control`.
+
+### Details
+
+This node is the supported way to drive a device from a desired state. It replaces "write the target into a global and poll it" flows:
+- **The desired state lives in this node**, not in a global. After a deploy or restart it starts **empty**, so nothing moves until a message arrives.
+- It **never acts on stale or offline data**. It reports `waiting` and resumes when fresh readings arrive.
+- The mode, the valve and the setpoint are checked **separately**, so a stuck valve doesn't block setpoint corrections. The mode is corrected first, because the setpoint means something different in each mode.
+- The setpoint is compared **with a tolerance**. A float such as 0.1 that the device stores as 0.10000000149 still counts as reached. Desired values outside the device's range are refused up front.
+- Corrections are spaced out (by default 1 s, doubling to 10 s). After *Report failure after* attempts, it sends `failed` and keeps trying at the slowest rate.
+- A change made elsewhere (front panel, another master) is reported as `drift`, then reverted, adopted or only reported.
+
+Invalid input (an unknown variable or valve, a setpoint out of range) goes to Catch nodes with `msg.alicat.error`.
+</script>

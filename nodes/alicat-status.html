@@ -1,0 +1,18 @@
+<script src="resources/@samuraimittal/node-red-alicat/alicat-editor.js"></script>
+<script src="resources/@samuraimittal/node-red-alicat/alicat-status.js"></script>
+
+<script type="text/html" data-template-name="alicat-status">
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-plug"></i> <span data-i18n="@samuraimittal/node-red-alicat/alicat-device:alicat.label.device"></span></label>
+        <input type="text" id="node-input-device">
+    </div>
+    <div class="form-row">
+        <label for="node-input-periodic"><i class="fa fa-clock-o"></i> <span data-i18n="alicat-status.label.periodic"></span></label>
+        <input type="text" id="node-input-periodic" style="width:80px"> <span data-i18n="alicat-status.unit.seconds"></span>
+        <span style="opacity:.7" data-i18n="alicat-status.tip.periodic"></span>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>

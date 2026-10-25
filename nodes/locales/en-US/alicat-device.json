@@ -1,0 +1,98 @@
+{
+    "alicat": {
+        "label": {
+            "device": "Device"
+        },
+        "validation": {
+            "intRange": "Must be a whole number from __min__ to __max__",
+            "numberRange": "Must be a number from __min__ to __max__",
+            "optionalNumber": "Leave empty, or enter a number of at least __min__",
+            "host": "Enter an IP address or host name, without spaces or slashes",
+            "commandId": "Must be a whole number of 0 or more",
+            "argument": "Must be a number",
+            "slots": "List reading names separated by commas"
+        },
+        "context": {
+            "defaultStore": "default (__store__)",
+            "missingStore": "__store__ (not configured)"
+        }
+    },
+    "alicat-device": {
+        "label": {
+            "default": "alicat",
+            "host": "Host",
+            "port": "Port",
+            "unitId": "Unit ID",
+            "test": "Test connection",
+            "gen1": "Firmware before 10v07 (Gen-1) only",
+            "layout": "Data frame",
+            "slots": "Slots",
+            "deviceType": "Device type",
+            "controlVariable": "Controls",
+            "unitLabels": "Units",
+            "advanced": "Advanced",
+            "mapMode": "Register map",
+            "requestTimeout": "Timeout (ms)",
+            "connectTimeout": "Connect (ms)",
+            "interFrameDelay": "Request gap (ms)",
+            "heartbeat": "Heartbeat (ms)",
+            "backoffMax": "Max retry (ms)",
+            "maxQueue": "Queue depth",
+            "trace": "Frame trace"
+        },
+        "placeholder": {
+            "name": "e.g. Station 3 MFC",
+            "host": "IP address or host name",
+            "slots": "absolutePressure, temperature, massFlow, setpoint",
+            "unitLabels": "massFlow=SCCM, gaugePressure=PSIG, setpoint=SCCM"
+        },
+        "layout": {
+            "auto": "Automatic (from slot count and device type)",
+            "extended-7": "extended-7: abs P, gauge P, baro P, temp, vol flow, mass flow, setpoint",
+            "mfc": "mfc: P, temp, vol flow, mass flow, setpoint",
+            "mfc-totalizer": "mfc-totalizer: as mfc + total",
+            "mfm": "mfm: P, temp, vol flow, mass flow",
+            "mfm-totalizer": "mfm-totalizer: as mfm + total",
+            "pc": "pc: pressure, setpoint",
+            "pg": "pg: pressure",
+            "custom": "Custom…"
+        },
+        "deviceType": {
+            "auto": "Automatic",
+            "mfc": "Mass flow controller",
+            "mfm": "Mass flow meter",
+            "pc": "Pressure controller",
+            "pg": "Pressure meter / gauge"
+        },
+        "controlVariable": {
+            "unknown": "Unknown",
+            "massFlow": "Mass flow",
+            "volumetricFlow": "Volumetric flow",
+            "absolutePressure": "Absolute pressure",
+            "gaugePressure": "Gauge pressure",
+            "differentialPressure": "Differential pressure",
+            "valveDrive": "Valve drive"
+        },
+        "mapMode": {
+            "auto": "Detect automatically",
+            "modern": "Firmware 10v07 or newer",
+            "legacy": "Firmware before 10v07"
+        },
+        "tip": {
+            "trace": "log every Modbus frame (hex) to the Node-RED log"
+        },
+        "test": {
+            "running": "Testing…",
+            "connected": "✓ Connected in __ms__ ms",
+            "reused": "(using the live connection)",
+            "firmware": "Firmware __firmware__",
+            "serial": ", serial __serial__",
+            "gen1": "Firmware before 10v07 (Gen-1)",
+            "controls": "Controls: __variable__",
+            "controlsUnknown": "unknown (Gen-1: set below)",
+            "gas": "Gas: __gas__",
+            "status": ", status: __status__",
+            "failed": "request failed"
+        }
+    }
+}
