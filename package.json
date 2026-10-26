@@ -1,7 +1,6 @@
 {
     "name": "@samuraimittal/node-red-alicat",
-    "version": "0.1.0-dev.0",
-    "private": true,
+    "version": "0.1.0",
     "description": "Node-RED nodes for Alicat mass flow and pressure controllers over Modbus TCP: one supervised socket per device, priority queue, decoded engineering units.",
     "license": "Apache-2.0",
     "author": "samuraimittal (https://github.com/samuraimittal)",
@@ -55,8 +54,7 @@
         "alicat-probe": "tools/alicat-probe.js"
     },
     "publishConfig": {
-        "access": "public",
-        "provenance": true
+        "access": "public"
     },
     "scripts": {
         "test": "mocha \"test/unit/**/*.test.js\" \"test/integration/**/*.test.js\" \"test/nodes/**/*.test.js\"",

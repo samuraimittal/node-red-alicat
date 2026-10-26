@@ -2,7 +2,7 @@
 
 All notable changes to this package are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the package uses [Semantic Versioning](https://semver.org/). Error codes (`err.code`, `msg.alicat.error.code`) are part of the public API.
 
-## [Unreleased] – 0.1.0
+## [0.1.0] – 2026-10-25
 
 First release. Hardware-tested on a Gen-2 instrument (firmware 10v20.0) and a Gen-1 instrument (9v07) over native Ethernet.
 
