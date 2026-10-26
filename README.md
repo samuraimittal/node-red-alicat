@@ -10,7 +10,7 @@ Node-RED nodes for Alicat Scientific mass flow and pressure controllers over **M
 
 The package has zero runtime dependencies.
 
-> **Status: pre-release (0.1.0-dev).**
+> **Status: early release (0.x).** Settings and messages may still change between minor versions; the [CHANGELOG](CHANGELOG.md) lists every change.
 > - **Hardware-tested** on a Gen-2 unit (firmware 10v20) and a Gen-1 unit (9v07). Other firmware is covered by the simulator. See [docs/hardware-validation.md](docs/hardware-validation.md).
 > - Modbus TCP only for now; Modbus RTU and serial connections are planned.
 >

@@ -1,6 +1,6 @@
 {
     "name": "@samuraimittal/node-red-alicat",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Node-RED nodes for Alicat mass flow and pressure controllers over Modbus TCP: one supervised socket per device, priority queue, decoded engineering units.",
     "license": "Apache-2.0",
     "author": "samuraimittal (https://github.com/samuraimittal)",
